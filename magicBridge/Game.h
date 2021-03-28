@@ -1,6 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "Background.h"
 #include "Bridge.h"
 #include "Yolk.h"
 
@@ -13,6 +14,8 @@ struct Game
     void handleEvent(SDL_Event& e);
     void loop();
     void render();
+
+    Background* background;
     //Bridge comprises of 11 dots
     Bridge* bridge;
     Yolk* yolk;

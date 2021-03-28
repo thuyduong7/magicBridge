@@ -3,13 +3,13 @@
 	<iostream>
 	"Core.h"
 
-1616480448 g:\magicbridge\core.h
+1616916037 g:\magicbridge\core.h
 	<iostream>
 	<SDL.h>
 	<SDL_image.h>
 	"Game.h"
 
-1616423856 g:\magicbridge\texture.h
+1616504569 g:\magicbridge\texture.h
 	<iostream>
 	<SDL.h>
 	<SDL_image.h>
@@ -28,11 +28,11 @@
 	"Core.h"
 	"Texture.h"
 
-1616491384 source:g:\magicbridge\materials.cpp
+1616917027 source:g:\magicbridge\materials.cpp
 	"Materials.h"
 	"Yolk.h"
 
-1616491384 g:\magicbridge\materials.h
+1616584427 g:\magicbridge\materials.h
 	<SDL.h>
 	<SDL_image.h>
 	"Texture.h"
@@ -41,25 +41,34 @@
 	<SDL.h>
 	<SDL_image.h>
 
-1616486786 source:g:\magicbridge\game.cpp
+1616584815 source:g:\magicbridge\game.cpp
 	"Game.h"
 	"Core.h"
 	"Materials.h"
 	<iostream>
 
-1616431815 g:\magicbridge\game.h
+1616584815 g:\magicbridge\game.h
+	"Background.h"
 	"Bridge.h"
 	"Yolk.h"
 
-1616492603 source:g:\magicbridge\yolk.cpp
+1616513910 source:g:\magicbridge\yolk.cpp
 	"Yolk.h"
 	"Core.h"
 	"Materials.h"
 	<iostream>
 
-1616491384 g:\magicbridge\yolk.h
+1616918078 g:\magicbridge\yolk.h
 	<SDL.h>
 	<queue>
 	<cmath>
 	"Bridge.h"
+
+1616917014 source:g:\magicbridge\background.cpp
+	"Background.h"
+	"Core.h"
+	"Materials.h"
+
+1616584642 g:\magicbridge\background.h
+	<SDL.h>
 

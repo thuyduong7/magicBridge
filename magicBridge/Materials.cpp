@@ -6,6 +6,7 @@ SDL_Texture* Materials::yolk;
 SDL_Rect Materials::yolkIdle;
 SDL_Rect Materials::yolkRun[TOTAL_YOLK_RUN_SPRITE];
 SDL_Rect Materials::yolkDie;
+SDL_Texture* Materials::background;
 
 bool Materials::load()
 {
@@ -36,6 +37,13 @@ bool Materials::load()
         yolkRun[i].w = YOLK_WIDTH;
         yolkRun[i].h = YOLK_HEIGHT;
     }
+
+    background = Texture::loadFromFile("Assets/Background.png");
+    if (background == NULL){
+        cout << "Fail to load background\n";
+        return false;
+    }
+
     return true;
 }
 
@@ -44,6 +52,7 @@ SDL_Texture* Materials::getTexture(MAT_TYPE type)
     SDL_Texture* newTexture = NULL;
     if (type == BRIDGE) newTexture = dot;
     else if (type == YOLK) newTexture = yolk;
+    else if (type == BACKGROUND) newTexture = background;
     return newTexture;
 }
 

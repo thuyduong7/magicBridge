@@ -7,9 +7,8 @@
 
 using namespace std;
 
-class Texture
+struct Texture
 {
-    public:
         Texture();
         ~Texture();
         static SDL_Texture* loadFromFile(string path);
@@ -17,7 +16,6 @@ class Texture
         SDL_Texture* getTexture();
         void free();
 
-    //private:
         SDL_Texture* texture;
         int width, height;
 };

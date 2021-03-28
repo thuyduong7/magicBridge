@@ -7,6 +7,8 @@ using namespace std;
 bool Game::init()
 {
     bool success = true;
+    background = new Background;
+
     bridge = new Bridge [NUM_OF_DOTS];
     for (int i = 0; i < NUM_OF_DOTS; i++){
         bridge[i].posX = i * DOT_WIDTH;
@@ -66,6 +68,7 @@ void Game::loop()
 
 void Game::render()
 {
+    background -> render();
     yolk->render(bridge);
     for (int i = 0; i < NUM_OF_DOTS; i++){
         bridge[i].render();

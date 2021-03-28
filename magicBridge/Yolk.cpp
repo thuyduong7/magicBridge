@@ -66,8 +66,8 @@ void Yolk::run(double _gap)
 void Yolk::move(Bridge* bridge)
 {
     if (cur_dir == LEFT && posX > 0 && bridge[0].posY > BRIDGE_IDLE_HEIGHT){
-        velX -= gap/20;
-        posX += velX/20;
+        velX -= gap/30;
+        posX += velX/30;
         cout << velX << ' ' << posX << endl;
         if (posX <= 0){
             posX = 0;
@@ -75,8 +75,8 @@ void Yolk::move(Bridge* bridge)
         }
     }
     if (cur_dir == RIGHT && posX < SCREEN_WIDTH-YOLK_WIDTH && bridge[0].posY < BRIDGE_IDLE_HEIGHT){
-        velX += gap/20;
-        posX += velX/20;
+        velX += gap/30;
+        posX += velX/30;
         cout << velX << ' ' << posX << endl;
         if (posX >= SCREEN_WIDTH - YOLK_WIDTH){
             posX = SCREEN_WIDTH - YOLK_WIDTH;
@@ -91,13 +91,15 @@ void Yolk::move(Bridge* bridge)
 
 void Yolk::render(Bridge* bridge)
 {
+    //Set the default sprite of Yolk
     srcRect = Materials::yolkIdle;
+    //When the bridge is inclined and Yolk is not at the edge of the screen
     if (posX != 0 && posX != SCREEN_WIDTH - YOLK_WIDTH && bridge[0].posY != BRIDGE_IDLE_HEIGHT)  srcRect = Materials::yolkRun[frame/FRAME_VALUE];
 
     dstRect = {posX, posY, width, height};
 
     SDL_RendererFlip flip = SDL_FLIP_NONE;
-    if (cur_dir == RIGHT || posX == SCREEN_WIDTH - YOLK_WIDTH) flip = SDL_FLIP_HORIZONTAL;
+    if (cur_dir == RIGHT || posX == SCREEN_WIDTH - YOLK_WIDTH || (last_cur_dir == RIGHT && gap == 0)) flip = SDL_FLIP_HORIZONTAL;
 
     Texture::render(texture, srcRect, dstRect, flip);
 
