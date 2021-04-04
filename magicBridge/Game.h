@@ -5,8 +5,9 @@
 #include "Bridge.h"
 #include "Yolk.h"
 #include "Enemy.h"
-
-
+#include "Radish.h"
+#include "Spike.h"
+#include "Bird.h"
 
 struct Game
 {

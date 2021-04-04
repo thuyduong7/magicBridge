@@ -34,6 +34,8 @@
 		</Compiler>
 		<Unit filename="Background.cpp" />
 		<Unit filename="Background.h" />
+		<Unit filename="Bird.cpp" />
+		<Unit filename="Bird.h" />
 		<Unit filename="Bridge.cpp" />
 		<Unit filename="Bridge.h" />
 		<Unit filename="Core.cpp" />
@@ -44,6 +46,10 @@
 		<Unit filename="Game.h" />
 		<Unit filename="Materials.cpp" />
 		<Unit filename="Materials.h" />
+		<Unit filename="Radish.cpp" />
+		<Unit filename="Radish.h" />
+		<Unit filename="Spike.cpp" />
+		<Unit filename="Spike.h" />
 		<Unit filename="Yolk.cpp" />
 		<Unit filename="Yolk.h" />
 		<Unit filename="main.cpp" />

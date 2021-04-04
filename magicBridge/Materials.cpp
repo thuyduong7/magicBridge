@@ -17,10 +17,13 @@ SDL_Rect radishSprite[TOTAL_RADISH_SPRITE];
 SDL_Texture* spikeTexture;
 SDL_Rect spikeSprite[TOTAL_SPIKE_SPRITE];
 
+SDL_Texture* birdTexture;
+SDL_Rect birdSprite[TOTAL_BIRD_SPRITE];
+
 bool Materials::load(SDL_Renderer* renderer)
 {
     //Load dot texture
-    dot = loadFromFile("Assets/Dot1.png", renderer);
+    dot = loadFromFile("Assets/Dot.png", renderer);
     if (dot == NULL){
         cout << "Fail to load dot\n";
         return false;
@@ -49,7 +52,7 @@ bool Materials::load(SDL_Renderer* renderer)
         yolkRun[i].h = YOLK_HEIGHT;
     }
     //Load background texture
-    background = loadFromFile("Assets/Background.png", renderer);
+    background = loadFromFile("Assets/design.png", renderer);
     if (background == NULL){
         cout << "Fail to load background\n";
         return false;
@@ -80,6 +83,19 @@ bool Materials::load(SDL_Renderer* renderer)
         spikeSprite[i].w = SPIKE_WIDTH;
         spikeSprite[i].h = SPIKE_HEIGHT;
     }
+
+    birdTexture = loadFromFile("Assets/birdSprite.png", renderer);
+    if (birdTexture == NULL){
+        cout << "Fail to load Spike\n";
+        return false;
+    }
+    //Set bird sprite
+    for (int i = 0; i < TOTAL_BIRD_SPRITE; i++){
+        birdSprite[i].x = BIRD_WIDTH * i;
+        birdSprite[i].y = 0;
+        birdSprite[i].w = BIRD_WIDTH;
+        birdSprite[i].h = BIRD_HEIGHT;
+    }
     return true;
 }
 
@@ -109,6 +125,8 @@ SDL_Texture* Materials::getTexture(MAT_TYPE type)
             return radishTexture;
         case SPIKE:
             return spikeTexture;
+        case BIRD:
+            return birdTexture;
     }
 }
 
@@ -130,6 +148,8 @@ SDL_Rect Materials::getSprite(MAT_TYPE type, SPRITE_TYPE _type, int i)
             return radishSprite[i];
         case SPIKE:
             return spikeSprite[i];
+        case BIRD:
+            return birdSprite[i];
     }
 }
 
@@ -146,4 +166,5 @@ void Materials::free()
     SDL_DestroyTexture(yolk);
     SDL_DestroyTexture(radishTexture);
     SDL_DestroyTexture(spikeTexture);
+    SDL_DestroyTexture(birdTexture);
 }

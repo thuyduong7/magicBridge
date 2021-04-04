@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1616931795 source:g:\magicbridge\main.cpp
+1617426277 source:g:\magicbridge\main.cpp
 	<iostream>
 	<ctime>
 	"Core.h"
@@ -27,12 +27,12 @@
 	"Bridge.h"
 	"Core.h"
 
-1617095995 source:g:\magicbridge\materials.cpp
+1617519324 source:g:\magicbridge\materials.cpp
 	"Materials.h"
 	"Yolk.h"
 	"Enemy.h"
 
-1617081137 g:\magicbridge\materials.h
+1617517124 g:\magicbridge\materials.h
 	<iostream>
 	<SDL.h>
 	<SDL_image.h>
@@ -42,17 +42,20 @@
 	<SDL_image.h>
 	"Materials.h"
 
-1617104057 source:g:\magicbridge\game.cpp
+1617513286 source:g:\magicbridge\game.cpp
 	"Game.h"
 	"Core.h"
 	"Materials.h"
 	<iostream>
 
-1617105685 g:\magicbridge\game.h
+1617363079 g:\magicbridge\game.h
 	"Background.h"
 	"Bridge.h"
 	"Yolk.h"
 	"Enemy.h"
+	"Radish.h"
+	"Spike.h"
+	"Bird.h"
 
 1617076930 source:g:\magicbridge\yolk.cpp
 	"Yolk.h"
@@ -67,19 +70,41 @@
 	"Bridge.h"
 	"Enemy.h"
 
-1617045631 source:g:\magicbridge\background.cpp
+1617477650 source:g:\magicbridge\background.cpp
 	"Background.h"
 	"Core.h"
 
-1617043018 g:\magicbridge\background.h
+1617477327 g:\magicbridge\background.h
 	<SDL.h>
 	"Materials.h"
 
-1617107056 g:\magicbridge\enemy.h
+1617518827 g:\magicbridge\enemy.h
 	<SDL.h>
 	"Materials.h"
+	"Bridge.h"
 
-1617103617 source:g:\magicbridge\enemy.cpp
+1617383941 source:g:\magicbridge\enemy.cpp
+	"Enemy.h"
+	"Core.h"
+
+1617517683 source:g:\magicbridge\radish.cpp
+	"Radish.h"
+
+1617512166 g:\magicbridge\radish.h
+	"Enemy.h"
+	"Core.h"
+
+1617383777 g:\magicbridge\spike.h
+	"Enemy.h"
+	"Core.h"
+
+1617372721 source:g:\magicbridge\spike.cpp
+	"Spike.h"
+
+1617517790 source:g:\magicbridge\bird.cpp
+	"Bird.h"
+
+1617517197 g:\magicbridge\bird.h
 	"Enemy.h"
 	"Core.h"
 

@@ -16,6 +16,11 @@ Enemy::Enemy(MAT_TYPE _type)
             width = SPIKE_WIDTH;
             height = SPIKE_HEIGHT;
             totalSprite = TOTAL_SPIKE_SPRITE;
+            break;
+        case BIRD:
+            width = BIRD_WIDTH;
+            height = BIRD_HEIGHT;
+            totalSprite = TOTAL_BIRD_SPRITE;
     }
     posX = 0;
     posY = 0;
@@ -23,27 +28,65 @@ Enemy::Enemy(MAT_TYPE _type)
     frame = 0;
 }
 
+/**
 SDL_Texture* Enemy::getTexture()
 {
     return enemyMat.getTexture(type);
 }
 
-void Enemy::setPos(MAT_TYPE _type)
+
+void Enemy::setPos()
+{
+    //int randDir;
+    switch(type)
+    {
+        case RADISH:
+            posX = rand()%(SCREEN_WIDTH - RADISH_WIDTH);
+            break;
+        case SPIKE:
+            //Set the side of the wall for Spike to move on
+            dir = DIRECTION(rand() % 2);
+            //randDir = rand() % 2;
+            if (dir == LEFT){
+                    //dir = LEFT;
+                    posX = 0;
+            }
+            else {
+                    //dir = RIGHT;
+                    posX = SCREEN_WIDTH - SPIKE_WIDTH;
+            }
+            break;
+        case BIRD:
+            dir = DIRECTION(rand() % 2);
+            if (dir == LEFT) {
+                    //dir = LEFT;
+                    posX = rand()%(SCREEN_WIDTH*2/3 - RADISH_WIDTH);
+            }
+            else {
+                    //dir = RIGHT;
+                    posX = rand()%(SCREEN_WIDTH*2/3 - RADISH_WIDTH) + SCREEN_WIDTH*1/3;
+            }
+    }
+}
+
+void Enemy::move()
 {
     switch(type)
     {
         case RADISH:
-            posX = rand()%(SCREEN_WIDTH-RADISH_WIDTH);
+
+            posY++;
             break;
         case SPIKE:
-            //Set the side of the wall for Spike to move on
-            // dir = 0: LEFT
-            // dir = 1: RIGHT
-            int dir = rand() % 2;
-            if (dir == 0) posX = 0;
-            else posX = SCREEN_WIDTH - SPIKE_WIDTH;
+            posY++;
+            break;
+        case BIRD:
+            posY++;
+            if (dir == LEFT)
+            break;
     }
 }
+
 
 void Enemy::render(SDL_Renderer* renderer)
 {
@@ -54,6 +97,8 @@ void Enemy::render(SDL_Renderer* renderer)
         enemyMat.render(renderer, texture, srcRect, dstRect, SDL_FLIP_HORIZONTAL);
     else enemyMat.render(renderer, texture, srcRect, dstRect);
     frame++;
-    posY++;
+    //posY++;
+    move();
     if (frame/FRAME_VALUE >= totalSprite) frame = 0;
 }
+*/

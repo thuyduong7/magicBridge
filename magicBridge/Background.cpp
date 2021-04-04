@@ -9,6 +9,7 @@ Background::Background()
     width = SCREEN_WIDTH;
     height = SCREEN_HEIGHT;
     srcRect = {posX, posY, width, height};
+    offset = 0;
 }
 
 Background::~Background()
@@ -18,6 +19,12 @@ Background::~Background()
 
 void Background::render(SDL_Renderer* renderer)
 {
-    dstRect = srcRect;
+    dstRect = {posX, offset, width, height};
+    backgroundMat.render(renderer, texture, srcRect, dstRect);
+}
+
+void Background::renderOffset(SDL_Renderer* renderer)
+{
+    dstRect = {posX, offset - height, width, height};
     backgroundMat.render(renderer, texture, srcRect, dstRect);
 }
