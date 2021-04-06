@@ -48,7 +48,6 @@ void Radish::render(SDL_Renderer* renderer)
     srcRect = enemyMat.getSprite(RADISH, RUN, frame/FRAME_VALUE);
     dstRect = {posX, posY, width, height};
     enemyMat.render(renderer, texture, srcRect, dstRect);
-    move();
     frame++;
     if (frame/FRAME_VALUE >= TOTAL_RADISH_SPRITE) frame = 0;
 }

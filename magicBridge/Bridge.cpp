@@ -29,17 +29,17 @@ void Bridge::setDir(DIRECTION _dir)
 bool Bridge::checkDir(Bridge* bridge)
 {
     bool move = false;
-    if (dir == LEFT){
+    if (bridge->dir == LEFT){
         move = true;
         if (bridge[0].posY < MAX_POS_Y){
             for (int i = 0; i < NUM_OF_DOTS; i++){
                 // (i-NUM_OF_DOTS/2) to return a symmetry  ( -5 -4 -3 -2 -1 0 1 2 3 4 5 )
                 // *3 to increase the speed of the bridge coming up and down
                 // The dot in the middle remains the same
-                bridge[i].posY -= (i - NUM_OF_DOTS/2)*3;
+                bridge[i].posY -= (i - NUM_OF_DOTS/2)*2;
             }
         }
-        bridge->dir = TOTAL_OF_DIRECTION;
+        //bridge->dir = TOTAL_OF_DIRECTION;
     }
     if (bridge->dir == RIGHT){
         move = true;
@@ -48,11 +48,12 @@ bool Bridge::checkDir(Bridge* bridge)
                 // (i-NUM_OF_DOTS/2) to return a symmetry  ( -5 -4 -3 -2 -1 0 1 2 3 4 5 )
                 // *3 to increase the speed of the bridge coming up and down
                 // The dot in the middle remains the same
-                bridge[i].posY += (i - NUM_OF_DOTS/2)*3;
+                bridge[i].posY += (i - NUM_OF_DOTS/2)*2;
             }
         }
-        bridge->dir = TOTAL_OF_DIRECTION;
+        //bridge->dir = TOTAL_OF_DIRECTION;
     }
+    if (bridge->dir == TOTAL_OF_DIRECTION) return false;
     return move;
 }
 

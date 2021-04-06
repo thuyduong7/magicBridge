@@ -33,7 +33,6 @@ void Spike::render(SDL_Renderer* renderer)
     if (posX == SCREEN_WIDTH - SPIKE_WIDTH)
         enemyMat.render(renderer, texture, srcRect, dstRect, SDL_FLIP_HORIZONTAL);
     else enemyMat.render(renderer, texture, srcRect, dstRect);
-    move();
     frame++;
     if (frame/FRAME_VALUE >= TOTAL_SPIKE_SPRITE) frame = 0;
 }

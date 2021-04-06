@@ -20,7 +20,7 @@ void Bird::setPos()
         minX = SCREEN_WIDTH*1/3;
         maxX = SCREEN_WIDTH - BIRD_WIDTH;
     }
-    cout << side << ' ' << dir << ' ' << minX << ' ' << maxX << endl;
+    //cout << side << ' ' << dir << ' ' << minX << ' ' << maxX << endl;
 }
 
 void Bird::move()
@@ -52,6 +52,5 @@ void Bird::render(SDL_Renderer* renderer)
     dstRect = {posX, posY, width, height};
     enemyMat.render(renderer, texture, srcRect, dstRect, flip);
     frame++;
-    move();
-    if (frame/FRAME_VALUE >= (TOTAL_BIRD_SPRITE-1)) frame = 0;
+    if (frame/FRAME_VALUE >= (TOTAL_BIRD_SPRITE)) frame = 0;
 }

@@ -11,7 +11,7 @@ using namespace std;
 const int TOTAL_YOLK_RUN_SPRITE = 6;
 const int TOTAL_RADISH_SPRITE = 5;
 const int TOTAL_SPIKE_SPRITE = 5;
-const int TOTAL_BIRD_SPRITE = 3;
+const int TOTAL_BIRD_SPRITE = 2;
 
 enum MAT_TYPE
 {
@@ -22,7 +22,8 @@ enum MAT_TYPE
     //Enemies
     RADISH,
     SPIKE,
-    BIRD
+    BIRD,
+    SPIKEBALL
 };
 
 enum SPRITE_TYPE

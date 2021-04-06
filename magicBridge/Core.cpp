@@ -65,7 +65,10 @@ void Core::handleEvent()
             quit = true;
         }
         else if (e.type == SDL_KEYDOWN){
-            game.handleEvent(e);
+            game.keypressed(e);
+        }
+        else if (e.type == SDL_KEYUP){
+            game.keyreleased(e);
         }
     }
     game.loop();
@@ -79,6 +82,8 @@ void Core::render()
         game.render(renderer);
 
         SDL_RenderPresent(renderer);
+
+        game.update();
 
 }
 

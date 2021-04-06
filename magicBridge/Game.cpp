@@ -53,6 +53,30 @@ void Game::handleEvent(SDL_Event& e)
     }
 }
 
+void Game::keypressed(SDL_Event& e)
+{
+    if (e.key.keysym.sym == SDLK_LEFT){
+        bridge->setDir(LEFT);
+        yolk->setDir(LEFT);
+    }
+    else if (e.key.keysym.sym == SDLK_RIGHT){
+        bridge->setDir(RIGHT);
+        yolk->setDir(RIGHT);
+    }
+}
+
+void Game::keyreleased(SDL_Event& e)
+{
+    if (e.key.keysym.sym == SDLK_LEFT){
+        bridge->setDir(TOTAL_OF_DIRECTION);
+        //yolk->setDir(TOTAL_OF_DIRECTION);
+    }
+    else if (e.key.keysym.sym == SDLK_RIGHT){
+        bridge->setDir(TOTAL_OF_DIRECTION);
+        //yolk->setDir(TOTAL_OF_DIRECTION);
+    }
+}
+
 void Game::loop()
 {
     ++(background->offset);
@@ -63,23 +87,41 @@ void Game::loop()
     if (bridge->checkDir(bridge)) yolk->run(bridge[0].posY - BRIDGE_IDLE_HEIGHT);
     yolk->move(bridge);
     //if (enemy.size() > 0) cout << enemy[0]->posY << endl;
-    if ( (enemy.size() > 0) &&  enemy[0]->posY > SCREEN_HEIGHT){
+    if ( (enemy.size() > 0) && ((enemy[0]->posY > SCREEN_HEIGHT) )){
             delete enemy[0];
             enemy.erase(enemy.begin());
     }
     int chance = (rand() % 100) + 1;
     if (( enemy.size() < 1) || ( (enemy.size() > 0) && (enemy[enemy.size()-1]->posY > MIN_DISTANCE) ) ){
-        if (chance > 70){
+        if (chance > 80){
+            cout << "Radish" << endl;
             enemy.push_back(new Radish);
             enemy[enemy.size()-1]->setPos();
-        } else if (chance > 30){
+            cout << enemy[enemy.size()-1]->posY;
+        } else if (chance > 60){
+            cout << "Spike" << endl;
             enemy.push_back(new Spike);
+            cout << enemy[enemy.size()-1]->posY;
             enemy[enemy.size()-1]->setPos();
-        } else if (chance > 0) {
+        } else if (chance > 40) {
+            cout << "Bird" << endl;
             enemy.push_back(new Bird);
             enemy[enemy.size()-1]->setPos();
+            cout << enemy[enemy.size()-1]->posY;
+        } else if (chance > 20) {
+            cout << "Spikeball" << endl;
+            enemy.push_back(new SpikeBall);
+            enemy[enemy.size()-1]->setPos();
+            cout << enemy[enemy.size()-1]->posY;
         }
         if (MIN_DISTANCE > SCREEN_HEIGHT/5) MIN_DISTANCE -= SCREEN_HEIGHT/30;
+    }
+}
+
+void Game::update()
+{
+    for (int i = 0; i < enemy.size(); i++){
+        enemy[i]->move();
     }
 }
 
@@ -99,7 +141,7 @@ void Game::render(SDL_Renderer* renderer)
 void Game::free()
 {
     delete background;
-    delete bridge;
+    delete []bridge;
     delete yolk;
     //delete radish;
     //delete spike;

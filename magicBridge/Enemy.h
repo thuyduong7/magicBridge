@@ -17,7 +17,8 @@ const int SPIKE_HEIGHT = 78;
 const int BIRD_WIDTH = 92;
 const int BIRD_HEIGHT = 66;
 
-
+const int SPIKEBALL_WIDTH = 44;
+const int SPIKEBALL_HEIGHT = 44;
 
 struct Enemy
 {
@@ -26,6 +27,7 @@ struct Enemy
     //SDL_Texture* getTexture();
     virtual void setPos(){};
     virtual void move(){};
+    virtual bool lastBall(){};
     virtual void render(SDL_Renderer* renderer){};
 
     MAT_TYPE type;

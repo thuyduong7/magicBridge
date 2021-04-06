@@ -8,12 +8,16 @@
 #include "Radish.h"
 #include "Spike.h"
 #include "Bird.h"
+#include "SpikeBall.h"
 
 struct Game
 {
     bool init();
     void handleEvent(SDL_Event& e);
+    void keypressed(SDL_Event& e);
+    void keyreleased(SDL_Event& e);
     void loop();
+    void update();
     void render(SDL_Renderer* renderer);
     void free();
 

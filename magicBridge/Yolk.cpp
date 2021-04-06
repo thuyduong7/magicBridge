@@ -16,7 +16,7 @@ Yolk::Yolk(int x, int y)
     cur_dir = TOTAL_OF_DIRECTION;
     last_cur_dir = TOTAL_OF_DIRECTION;
     srcRect = {posX, posY, width, height};
-    int frame = 0;
+    frame = 0;
 }
 
 Yolk::~Yolk()
@@ -45,23 +45,13 @@ void Yolk::run(double _gap)
 {
     gap = abs(_gap);
     last_cur_dir = cur_dir;
-    cur_dir = dir.front();
+    if (!dir.empty()){cur_dir = dir.front();
     dir.pop();
+    }
     if (_gap < 0) cur_dir = RIGHT;
     else cur_dir = LEFT;
     if (last_cur_dir != cur_dir) velX = 0;
-    /**if (cur_dir == LEFT){
-        cout << gap << endl;
-        velX -= gap/10;
-        posX += velX;
-    }
-    if (cur_dir == RIGHT){
-        cout << gap << endl;
-        velX += gap/10;
-        posX += velX;
-    }
-    */
-    cout << last_cur_dir << ' ' << cur_dir << endl;
+
 }
 
 void Yolk::move(Bridge* bridge)

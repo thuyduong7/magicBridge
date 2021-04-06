@@ -21,6 +21,11 @@ Enemy::Enemy(MAT_TYPE _type)
             width = BIRD_WIDTH;
             height = BIRD_HEIGHT;
             totalSprite = TOTAL_BIRD_SPRITE;
+            break;
+        case SPIKEBALL:
+            width = SPIKEBALL_WIDTH;
+            height = SPIKEBALL_HEIGHT;
+
     }
     posX = 0;
     posY = 0;

@@ -11,14 +11,16 @@ SDL_Rect yolkIdle;
 SDL_Rect yolkRun[TOTAL_YOLK_RUN_SPRITE];
 SDL_Rect yolkDie;
 
-SDL_Texture* radishTexture;
+SDL_Texture* radish;
 SDL_Rect radishSprite[TOTAL_RADISH_SPRITE];
 
-SDL_Texture* spikeTexture;
+SDL_Texture* spike;
 SDL_Rect spikeSprite[TOTAL_SPIKE_SPRITE];
 
-SDL_Texture* birdTexture;
+SDL_Texture* bird;
 SDL_Rect birdSprite[TOTAL_BIRD_SPRITE];
+
+SDL_Texture* spikeBall;
 
 bool Materials::load(SDL_Renderer* renderer)
 {
@@ -58,8 +60,8 @@ bool Materials::load(SDL_Renderer* renderer)
         return false;
     }
     //Load radish texture
-    radishTexture = loadFromFile("Assets/Radish.png", renderer);
-    if (radishTexture == NULL){
+    radish = loadFromFile("Assets/Radish.png", renderer);
+    if (radish == NULL){
         cout << "Fail to load Radish\n";
         return false;
     }
@@ -71,8 +73,8 @@ bool Materials::load(SDL_Renderer* renderer)
         radishSprite[i].h = RADISH_HEIGHT;
     }
     //Load spike texture
-    spikeTexture = loadFromFile("Assets/Spike.png", renderer);
-    if (spikeTexture == NULL){
+    spike = loadFromFile("Assets/Spike.png", renderer);
+    if (spike == NULL){
         cout << "Fail to load Spike\n";
         return false;
     }
@@ -84,8 +86,8 @@ bool Materials::load(SDL_Renderer* renderer)
         spikeSprite[i].h = SPIKE_HEIGHT;
     }
 
-    birdTexture = loadFromFile("Assets/birdSprite.png", renderer);
-    if (birdTexture == NULL){
+    bird = loadFromFile("Assets/birdSprite.png", renderer);
+    if (bird == NULL){
         cout << "Fail to load Spike\n";
         return false;
     }
@@ -96,6 +98,14 @@ bool Materials::load(SDL_Renderer* renderer)
         birdSprite[i].w = BIRD_WIDTH;
         birdSprite[i].h = BIRD_HEIGHT;
     }
+
+    //Load spike ball texture
+    spikeBall = loadFromFile("Assets/spikeBall1.png", renderer);
+    if (spikeBall == NULL){
+        cout << "Fail to load Spike Ball\n";
+        return false;
+    }
+
     return true;
 }
 
@@ -122,11 +132,13 @@ SDL_Texture* Materials::getTexture(MAT_TYPE type)
         case BACKGROUND:
             return background;
         case RADISH:
-            return radishTexture;
+            return radish;
         case SPIKE:
-            return spikeTexture;
+            return spike;
         case BIRD:
-            return birdTexture;
+            return bird;
+        case SPIKEBALL:
+            return spikeBall;
     }
 }
 
@@ -164,7 +176,8 @@ void Materials::free()
     SDL_DestroyTexture(background);
     SDL_DestroyTexture(dot);
     SDL_DestroyTexture(yolk);
-    SDL_DestroyTexture(radishTexture);
-    SDL_DestroyTexture(spikeTexture);
-    SDL_DestroyTexture(birdTexture);
+    SDL_DestroyTexture(radish);
+    SDL_DestroyTexture(spike);
+    SDL_DestroyTexture(bird);
+    SDL_DestroyTexture(spikeBall);
 }
