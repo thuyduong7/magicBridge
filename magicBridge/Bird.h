@@ -15,6 +15,7 @@ struct Bird : public Enemy
     Bird();
     void setPos();
     void move();
+    bool checkCollision(Yolk* yolk);
     void render(SDL_Renderer* renderer);
 
     SIDE side;

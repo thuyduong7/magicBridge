@@ -25,6 +25,15 @@ void Spike::move()
     posY++;
 }
 
+bool Spike::checkCollision(Yolk* yolk)
+{
+    collider.w = (SPIKE_WIDTH*2)/5;
+    collider.h = (SPIKE_HEIGHT*2)/5;
+    collider.x = posX + (collider.w/2);
+    collider.y = posY + (collider.h/2);
+    Enemy::checkCollision(yolk);
+}
+
 void Spike::render(SDL_Renderer* renderer)
 {
     srcRect = enemyMat.getSprite(SPIKE, RUN, frame/FRAME_VALUE);

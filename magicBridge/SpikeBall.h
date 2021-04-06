@@ -17,12 +17,12 @@ struct SpikeBall : public Enemy
     ~SpikeBall();
     void setPos();
     void move();
+    bool checkCollision(Yolk* yolk);
     void render(SDL_Renderer* renderer);
 
     int numOfRows;
-    int firstEmptyPos;
+    int firstEmptyPos, lastEmptyPos;
     Ball **ball;
-    bool setBall;
 };
 
 #endif // SPIKEBALL_H

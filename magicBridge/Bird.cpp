@@ -46,6 +46,16 @@ void Bird::move()
     }
 }
 
+bool Bird::checkCollision(Yolk* yolk)
+{
+    collider.w = (BIRD_WIDTH*1)/2;
+    collider.h = (BIRD_HEIGHT*1)/2;
+    collider.x = posX + (collider.w/2);
+    collider.y = posY + (collider.h/2);
+    //cout << collider.w << ' ' << collider.h << ' ' << collider.x << ' ' << collider.y << endl;
+    Enemy::checkCollision(yolk);
+}
+
 void Bird::render(SDL_Renderer* renderer)
 {
     srcRect = enemyMat.getSprite(BIRD, RUN, frame/FRAME_VALUE);

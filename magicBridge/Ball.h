@@ -7,7 +7,10 @@
 struct Ball : public Enemy
 {
     Ball();
+    //bool checkCollision(Yolk* yolk);
     void render(SDL_Renderer* renderer);
+
+    bool setBall;
 };
 
 #endif // BALL_H

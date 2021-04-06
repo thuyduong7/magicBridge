@@ -21,9 +21,10 @@ int main(int argc, char* argv[])
             cout << "Fail to load media\n";
         }
         else{
-            while (!core.quit){
+            bool quit = false;
+            while (!quit){
                 Uint32 startTime = SDL_GetTicks();
-                core.handleEvent();
+                core.handleEvent(quit);
                 core.render();
                 Uint32 frameTime = SDL_GetTicks() - startTime;
                 if (frameTime < DELAY_TIME){

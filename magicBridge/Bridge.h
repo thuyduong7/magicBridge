@@ -19,10 +19,6 @@ enum DIRECTION
 const int DOT_HEIGHT = 40;
 const int DOT_WIDTH = 40;
 
-
-//The max y that bridge can fall down to
-const int MAX_POS_Y = 740;
-
 struct Bridge
 {
     Bridge();

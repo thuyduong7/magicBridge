@@ -10,6 +10,7 @@ struct Radish : public Enemy
     ~Radish();
     void setPos();
     void move();
+    bool checkCollision(Yolk* yolk);
     void render(SDL_Renderer* renderer);
 
     DIRECTION dir;

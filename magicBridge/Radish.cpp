@@ -43,6 +43,16 @@ void Radish::move()
     }
 }
 
+bool Radish::checkCollision(Yolk* yolk)
+{
+    collider.w = (RADISH_WIDTH*3)/5;
+    collider.h = (RADISH_HEIGHT*3)/5;
+    collider.x = posX + (collider.w/2);
+    collider.y = posY + (collider.h/2);
+    //cout << collider.w << ' ' << collider.h << ' ' << collider.x << ' ' << collider.y << endl;
+    Enemy::checkCollision(yolk);
+}
+
 void Radish::render(SDL_Renderer* renderer)
 {
     srcRect = enemyMat.getSprite(RADISH, RUN, frame/FRAME_VALUE);

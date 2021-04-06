@@ -33,6 +33,54 @@ Enemy::Enemy(MAT_TYPE _type)
     frame = 0;
 }
 
+bool Enemy::checkCollision(Yolk* yolk)
+{
+    int leftYolk, leftEnemy;
+    int rightYolk, rightEnemy;
+    int topYolk, topEnemy;
+    int bottomYolk, bottomEnemy;
+
+    leftEnemy = collider.x;
+    rightEnemy = collider.x + collider.w;
+    topEnemy = collider.y;
+    bottomEnemy = collider.y + collider.h;
+
+    //cout << leftEnemy << ' ' << rightEnemy << ' ' << topEnemy << ' ' << bottomEnemy << endl;
+
+    // (MIN_POS_Y,MAX_POS_Y) is the space where the collision could occur
+    if (bottomEnemy < MIN_POS_Y) return false;
+    if (topEnemy > MAX_POS_Y) return false;
+
+    leftYolk = yolk->posX;
+    rightYolk = yolk->posX + yolk->width;
+    topYolk = yolk->posY;
+    bottomYolk = yolk->posY + yolk->height;
+
+    //cout << leftYolk << ' ' << rightYolk << ' ' << topYolk << ' ' << bottomYolk << endl;
+    //cout << "////\n";
+
+    if( bottomYolk <= topEnemy )
+    {
+        return false;
+    }
+
+    if( topYolk >= bottomEnemy )
+    {
+        return false;
+    }
+
+    if( rightYolk <= leftEnemy )
+    {
+        return false;
+    }
+
+    if( leftYolk >= rightEnemy )
+    {
+        return false;
+    }
+    return true;
+}
+
 /**
 SDL_Texture* Enemy::getTexture()
 {

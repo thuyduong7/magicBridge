@@ -1,10 +1,10 @@
 # depslib dependency file v1.0
-1617527297 source:g:\magicbridge\main.cpp
+1617697551 source:g:\magicbridge\main.cpp
 	<iostream>
 	<ctime>
 	"Core.h"
 
-1617527297 g:\magicbridge\core.h
+1617700532 g:\magicbridge\core.h
 	<iostream>
 	<SDL.h>
 	<SDL_image.h>
@@ -15,7 +15,7 @@
 	<SDL.h>
 	<SDL_image.h>
 
-1617541644 source:g:\magicbridge\core.cpp
+1617698059 source:g:\magicbridge\core.cpp
 	"Core.h"
 	"Materials.h"
 
@@ -23,32 +23,33 @@
 	"Texture.h"
 	"Core.h"
 
-1617543362 source:g:\magicbridge\bridge.cpp
+1617700472 source:g:\magicbridge\bridge.cpp
 	"Bridge.h"
 	"Core.h"
 
-1617527297 source:g:\magicbridge\materials.cpp
+1617686202 source:g:\magicbridge\materials.cpp
 	"Materials.h"
 	"Yolk.h"
 	"Enemy.h"
 
-1617527297 g:\magicbridge\materials.h
+1617548612 g:\magicbridge\materials.h
 	<iostream>
 	<SDL.h>
 	<SDL_image.h>
 
-1617540809 g:\magicbridge\bridge.h
+1617700532 g:\magicbridge\bridge.h
 	<SDL.h>
 	<SDL_image.h>
 	"Materials.h"
 
-1617543323 source:g:\magicbridge\game.cpp
+1617704139 source:g:\magicbridge\game.cpp
 	"Game.h"
 	"Core.h"
 	"Materials.h"
 	<iostream>
+	<vector>
 
-1617541644 g:\magicbridge\game.h
+1617698059 g:\magicbridge\game.h
 	"Background.h"
 	"Bridge.h"
 	"Yolk.h"
@@ -56,19 +57,18 @@
 	"Radish.h"
 	"Spike.h"
 	"Bird.h"
+	"SpikeBall.h"
 
-1617543629 source:g:\magicbridge\yolk.cpp
+1617698739 source:g:\magicbridge\yolk.cpp
 	"Yolk.h"
 	"Core.h"
 	"Materials.h"
 	<iostream>
 
-1617527297 g:\magicbridge\yolk.h
+1617698739 g:\magicbridge\yolk.h
 	<SDL.h>
-	<queue>
 	<cmath>
 	"Bridge.h"
-	"Enemy.h"
 
 1617527297 source:g:\magicbridge\background.cpp
 	"Background.h"
@@ -78,33 +78,34 @@
 	<SDL.h>
 	"Materials.h"
 
-1617527297 g:\magicbridge\enemy.h
+1617719369 g:\magicbridge\enemy.h
 	<SDL.h>
 	"Materials.h"
 	"Bridge.h"
+	"Yolk.h"
 
-1617527297 source:g:\magicbridge\enemy.cpp
+1617724072 source:g:\magicbridge\enemy.cpp
 	"Enemy.h"
 	"Core.h"
 
-1617527297 source:g:\magicbridge\radish.cpp
+1617724526 source:g:\magicbridge\radish.cpp
 	"Radish.h"
 
-1617527297 g:\magicbridge\radish.h
+1617698813 g:\magicbridge\radish.h
 	"Enemy.h"
 	"Core.h"
 
-1617527297 g:\magicbridge\spike.h
+1617699141 g:\magicbridge\spike.h
 	"Enemy.h"
 	"Core.h"
 
-1617527297 source:g:\magicbridge\spike.cpp
+1617726155 source:g:\magicbridge\spike.cpp
 	"Spike.h"
 
-1617527297 source:g:\magicbridge\bird.cpp
+1617725645 source:g:\magicbridge\bird.cpp
 	"Bird.h"
 
-1617527297 g:\magicbridge\bird.h
+1617699141 g:\magicbridge\bird.h
 	"Enemy.h"
 	"Core.h"
 
@@ -323,4 +324,19 @@
 	"Enemy.h"
 	"Core.h"
 	"Ball.h"
+
+1617706107 g:\magicbridge\spikeball.h
+	"Enemy.h"
+	"Core.h"
+	"Ball.h"
+
+1617703859 g:\magicbridge\ball.h
+	"Enemy.h"
+	"Core.h"
+
+1617703859 source:g:\magicbridge\ball.cpp
+	"Ball.h"
+
+1617723992 source:g:\magicbridge\spikeball.cpp
+	"SpikeBall.h"
 

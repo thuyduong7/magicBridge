@@ -31,7 +31,7 @@ bool Materials::load(SDL_Renderer* renderer)
         return false;
     }
     //Load yolk texture
-    yolk = loadFromFile("Assets/Yolk.png", renderer);
+    yolk = loadFromFile("Assets/catSprite.png", renderer);
     if (yolk == NULL){
         cout << "Fail to load Yolk\n";
         return false;

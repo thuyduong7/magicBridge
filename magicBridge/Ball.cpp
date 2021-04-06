@@ -2,7 +2,14 @@
 
 Ball::Ball() : Enemy(SPIKEBALL)
 {
+    setBall = false;
 }
+/**
+bool Ball::checkCollision(Yolk* yolk)
+{
+    Enemy::checkCollision(yolk);
+}
+*/
 
 void Ball::render(SDL_Renderer* renderer)
 {

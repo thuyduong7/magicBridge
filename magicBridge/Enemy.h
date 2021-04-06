@@ -5,6 +5,7 @@
 
 #include "Materials.h"
 #include "Bridge.h"
+#include "Yolk.h"
 
 const int FRAME_VALUE = 6;
 
@@ -20,6 +21,8 @@ const int BIRD_HEIGHT = 66;
 const int SPIKEBALL_WIDTH = 44;
 const int SPIKEBALL_HEIGHT = 44;
 
+//struct Yolk;
+
 struct Enemy
 {
     Enemy(){};
@@ -27,18 +30,18 @@ struct Enemy
     //SDL_Texture* getTexture();
     virtual void setPos(){};
     virtual void move(){};
-    virtual bool lastBall(){};
+    virtual bool checkCollision(Yolk* yolk);
     virtual void render(SDL_Renderer* renderer){};
 
     MAT_TYPE type;
     double posX, posY;
     int width, height;
     double velX, velY;
-    //DIRECTION dir;
     int totalSprite;
     SDL_Texture* texture;
     Materials enemyMat;
     SDL_Rect srcRect, dstRect;
+    SDL_Rect collider;
     int frame;
 
 };

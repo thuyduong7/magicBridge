@@ -10,7 +10,7 @@ Materials material;
 
 Core::Core()
 {
-    quit = false;
+    //quit = false;
 }
 
 Core::~Core()
@@ -57,7 +57,7 @@ bool Core::loadMedia()
     return true;
 }
 
-void Core::handleEvent()
+void Core::handleEvent(bool& quit)
 {
     SDL_Event e;
     while (SDL_PollEvent(&e) != 0){
@@ -71,7 +71,7 @@ void Core::handleEvent()
             game.keyreleased(e);
         }
     }
-    game.loop();
+    game.loop(quit);
 }
 
 void Core::render()

@@ -2,6 +2,8 @@
 #include "Core.h"
 #include "Materials.h"
 #include <iostream>
+#include <vector>
+
 using namespace std;
 
 vector <Enemy*> enemy;
@@ -77,7 +79,7 @@ void Game::keyreleased(SDL_Event& e)
     }
 }
 
-void Game::loop()
+void Game::loop(bool& quit)
 {
     ++(background->offset);
     if( background->offset > background->height )
@@ -94,27 +96,30 @@ void Game::loop()
     int chance = (rand() % 100) + 1;
     if (( enemy.size() < 1) || ( (enemy.size() > 0) && (enemy[enemy.size()-1]->posY > MIN_DISTANCE) ) ){
         if (chance > 80){
-            cout << "Radish" << endl;
+            //cout << "Radish" << endl;
             enemy.push_back(new Radish);
             enemy[enemy.size()-1]->setPos();
-            cout << enemy[enemy.size()-1]->posY;
+            //cout << enemy[enemy.size()-1]->posY;
         } else if (chance > 60){
-            cout << "Spike" << endl;
+            //cout << "Spike" << endl;
             enemy.push_back(new Spike);
-            cout << enemy[enemy.size()-1]->posY;
+            //cout << enemy[enemy.size()-1]->posY;
             enemy[enemy.size()-1]->setPos();
         } else if (chance > 40) {
-            cout << "Bird" << endl;
+            //cout << "Bird" << endl;
             enemy.push_back(new Bird);
             enemy[enemy.size()-1]->setPos();
-            cout << enemy[enemy.size()-1]->posY;
+            //cout << enemy[enemy.size()-1]->posY;
         } else if (chance > 20) {
             cout << "Spikeball" << endl;
             enemy.push_back(new SpikeBall);
             enemy[enemy.size()-1]->setPos();
-            cout << enemy[enemy.size()-1]->posY;
+            //cout << enemy[enemy.size()-1]->posY;
         }
         if (MIN_DISTANCE > SCREEN_HEIGHT/5) MIN_DISTANCE -= SCREEN_HEIGHT/30;
+    }
+    for (int i = 0; i < enemy.size(); i++){
+        if (enemy[i]->checkCollision(yolk)) quit = true;
     }
 }
 

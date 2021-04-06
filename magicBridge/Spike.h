@@ -9,6 +9,7 @@ struct Spike : public Enemy
     Spike();
     void setPos();
     void move();
+    bool checkCollision(Yolk* yolk);
     void render(SDL_Renderer* renderer);
 
     DIRECTION dir;
