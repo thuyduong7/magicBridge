@@ -4,23 +4,20 @@
 #include "Enemy.h"
 #include "Core.h"
 
-enum SIDE
-{
-    _LEFT,
-    _SIDE
-};
-
 struct Bird : public Enemy
 {
     Bird();
+    ~Bird();
     void setPos();
-    void move();
+    void move(double mul);
     bool checkCollision(Yolk* yolk);
-    void render(SDL_Renderer* renderer);
+    void increaseVelY();
+    void render(SDL_Renderer* renderer, STATE state);
+    void free();
 
-    SIDE side;
     DIRECTION dir;
     int minX, maxX;
+    int distance;
     SDL_RendererFlip flip;
 };
 

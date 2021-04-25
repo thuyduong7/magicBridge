@@ -6,7 +6,7 @@
 
 #include "Materials.h"
 
-const int NUM_OF_DOTS = 11;
+const int NUM_OF_DOTS = 9;
 
 enum DIRECTION
 {

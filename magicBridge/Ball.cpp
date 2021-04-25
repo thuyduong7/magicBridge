@@ -4,15 +4,19 @@ Ball::Ball() : Enemy(SPIKEBALL)
 {
     setBall = false;
 }
-/**
-bool Ball::checkCollision(Yolk* yolk)
-{
-    Enemy::checkCollision(yolk);
-}
-*/
 
-void Ball::render(SDL_Renderer* renderer)
+Ball::~Ball()
+{
+
+}
+
+void Ball::render(SDL_Renderer* renderer, STATE state)
 {
     dstRect = {posX, posY, width, height};
     enemyMat.render(renderer, texture, srcRect, dstRect);
+}
+
+void Ball::free()
+{
+    Enemy::free();
 }

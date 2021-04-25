@@ -9,9 +9,11 @@ struct Radish : public Enemy
     Radish();
     ~Radish();
     void setPos();
-    void move();
+    void move(double mul);
     bool checkCollision(Yolk* yolk);
-    void render(SDL_Renderer* renderer);
+    //void increaseVelY();
+    void render(SDL_Renderer* renderer, STATE state);
+    void free();
 
     DIRECTION dir;
     int defaultPosX;

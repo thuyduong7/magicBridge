@@ -1,9 +1,10 @@
 #include "Background.h"
 #include "Core.h"
 
-Background::Background()
+//Background
+Background::Background(MAT_TYPE _type)
 {
-    texture = backgroundMat.getTexture(BACKGROUND);
+    texture = backgroundMat.getTexture(_type);
     posX = 0;
     posY = 0;
     width = SCREEN_WIDTH;

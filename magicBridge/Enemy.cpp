@@ -25,30 +25,37 @@ Enemy::Enemy(MAT_TYPE _type)
         case SPIKEBALL:
             width = SPIKEBALL_WIDTH;
             height = SPIKEBALL_HEIGHT;
-
+            break;
+        case COIN:
+            width = COIN_WIDTH;
+            height = COIN_HEIGHT;
+            totalSprite = TOTAL_COIN_SPRITE;
     }
     posX = 0;
     posY = 0;
+    velY = VEL_Y;
     srcRect = {0,0,width,height};
     frame = 0;
+    multiple = 1;
 }
 
 bool Enemy::checkCollision(Yolk* yolk)
 {
-    int leftYolk, leftEnemy;
-    int rightYolk, rightEnemy;
-    int topYolk, topEnemy;
-    int bottomYolk, bottomEnemy;
+    double leftYolk, leftEnemy;
+    double rightYolk, rightEnemy;
+    double topYolk, topEnemy;
+    double bottomYolk, bottomEnemy;
 
-    leftEnemy = collider.x;
-    rightEnemy = collider.x + collider.w;
-    topEnemy = collider.y;
-    bottomEnemy = collider.y + collider.h;
+    leftEnemy = posX + double(width/3);
+    rightEnemy = leftEnemy + double(width/3);
+    topEnemy = posY + double(height/3);
+    bottomEnemy = topEnemy + double(height/3);
 
     //cout << leftEnemy << ' ' << rightEnemy << ' ' << topEnemy << ' ' << bottomEnemy << endl;
+    //cout << yolk->posX << ' ' << yolk->posX + yolk->width << ' ' << yolk->posY << ' ' << yolk->posY + yolk->height << endl;
 
     // (MIN_POS_Y,MAX_POS_Y) is the space where the collision could occur
-    if (bottomEnemy < MIN_POS_Y) return false;
+    if (bottomEnemy < (MIN_POS_Y - YOLK_HEIGHT)) return false;
     if (topEnemy > MAX_POS_Y) return false;
 
     leftYolk = yolk->posX;
@@ -79,6 +86,11 @@ bool Enemy::checkCollision(Yolk* yolk)
         return false;
     }
     return true;
+}
+
+void Enemy::free()
+{
+    //SDL_DestroyTexture(texture);
 }
 
 /**

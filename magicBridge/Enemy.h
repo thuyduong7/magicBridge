@@ -15,23 +15,30 @@ const int RADISH_HEIGHT = 63;
 const int SPIKE_WIDTH = 70;
 const int SPIKE_HEIGHT = 78;
 
-const int BIRD_WIDTH = 92;
-const int BIRD_HEIGHT = 66;
+const int BIRD_WIDTH = 85;
+const int BIRD_HEIGHT = 61;
 
-const int SPIKEBALL_WIDTH = 44;
-const int SPIKEBALL_HEIGHT = 44;
+const int SPIKEBALL_WIDTH = 40;
+const int SPIKEBALL_HEIGHT = 40;
 
-//struct Yolk;
+const int COIN_WIDTH = 28;
+const int COIN_HEIGHT = 37;
+
+const double VEL_Y = 3;
+const double SPIKE_VEL_Y = 2.5;
 
 struct Enemy
 {
     Enemy(){};
     Enemy(MAT_TYPE _type);
+    ~Enemy(){};
     //SDL_Texture* getTexture();
     virtual void setPos(){};
-    virtual void move(){};
+    virtual void move(double mul){};
     virtual bool checkCollision(Yolk* yolk);
-    virtual void render(SDL_Renderer* renderer){};
+    //virtual void increaseVelY();
+    virtual void render(SDL_Renderer* renderer, STATE state){};
+    virtual void free();
 
     MAT_TYPE type;
     double posX, posY;
@@ -43,7 +50,7 @@ struct Enemy
     SDL_Rect srcRect, dstRect;
     SDL_Rect collider;
     int frame;
-
+    double multiple;
 };
 
 #endif // ENEMY_H
