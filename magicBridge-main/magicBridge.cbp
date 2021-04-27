@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="magicBridge" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/magicBridge" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/magicBridge" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="Background.cpp" />
+		<Unit filename="Background.h" />
+		<Unit filename="Bird.cpp" />
+		<Unit filename="Bird.h" />
+		<Unit filename="Bridge.cpp" />
+		<Unit filename="Bridge.h" />
+		<Unit filename="Button.cpp" />
+		<Unit filename="Button.h" />
+		<Unit filename="Coin.cpp" />
+		<Unit filename="Coin.h" />
+		<Unit filename="Core.cpp" />
+		<Unit filename="Core.h" />
+		<Unit filename="Enemy.cpp" />
+		<Unit filename="Enemy.h" />
+		<Unit filename="Game.cpp" />
+		<Unit filename="Game.h" />
+		<Unit filename="Materials.cpp" />
+		<Unit filename="Materials.h" />
+		<Unit filename="Music.cpp" />
+		<Unit filename="Music.h" />
+		<Unit filename="Radish.cpp" />
+		<Unit filename="Radish.h" />
+		<Unit filename="Spike.cpp" />
+		<Unit filename="Spike.h" />
+		<Unit filename="SpikeBall.cpp" />
+		<Unit filename="SpikeBall.h" />
+		<Unit filename="Text.cpp" />
+		<Unit filename="Text.h" />
+		<Unit filename="Timer.cpp" />
+		<Unit filename="Timer.h" />
+		<Unit filename="Yolk.cpp" />
+		<Unit filename="Yolk.h" />
+		<Unit filename="main.cpp" />
+		<Extensions>
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
