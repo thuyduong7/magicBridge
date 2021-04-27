@@ -8,12 +8,16 @@ Coin::Coin() : Enemy(COIN)
 
 Coin::~Coin()
 {
+
 }
 
 void Coin::setPos(vector<Enemy*> &enemy)
 {
     bool touch = false;
-    sumOFCoins = rand() % 5 + 1;
+    if (enemy.empty()){
+        posX = rand()%(PLAYING_SCREEN_WIDTH - COIN_WIDTH) + (MIN_POS_X);
+        return;
+    }
     if ( (enemy[enemy.size()-1]->type == SPIKEBALL)){
         posY -= (enemy[enemy.size()-1]->height + (rand() % SCREEN_HEIGHT/5) + SCREEN_HEIGHT/10);
     }
@@ -34,9 +38,9 @@ void Coin::setPos(vector<Enemy*> &enemy)
 }
 
 
-void Coin::move()
+void Coin::move(double mul)
 {
-    posY += velY;
+    posY += (velY * mul);
 }
 
 bool Coin::checkCollision(Yolk* yolk)
@@ -103,12 +107,12 @@ bool Coin::checkCollisionEnemy(Enemy* enemy)
     return true;
 }
 
-void Coin::render(SDL_Renderer* renderer, bool& quit)
+void Coin::render(SDL_Renderer* renderer, STATE state)
 {
     srcRect = enemyMat.getSprite(COIN, RUN, frame/FRAME_VALUE);
     dstRect = {posX, posY, width, height};
     enemyMat.render(renderer, texture, srcRect, dstRect);
-    if (!quit) frame++;
+    if (state != HIT_2) frame++;
     if (frame/FRAME_VALUE >= TOTAL_COIN_SPRITE) frame = 0;
 }
 

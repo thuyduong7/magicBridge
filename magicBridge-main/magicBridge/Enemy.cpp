@@ -36,6 +36,7 @@ Enemy::Enemy(MAT_TYPE _type)
     velY = VEL_Y;
     srcRect = {0,0,width,height};
     frame = 0;
+    multiple = 1;
 }
 
 bool Enemy::checkCollision(Yolk* yolk)
@@ -45,10 +46,10 @@ bool Enemy::checkCollision(Yolk* yolk)
     double topYolk, topEnemy;
     double bottomYolk, bottomEnemy;
 
-    leftEnemy = collider.x;
-    rightEnemy = collider.x + collider.w;
-    topEnemy = collider.y;
-    bottomEnemy = collider.y + collider.h;
+    leftEnemy = posX + double(width/3);
+    rightEnemy = leftEnemy + double(width/3);
+    topEnemy = posY + double(height/3);
+    bottomEnemy = topEnemy + double(height/3);
 
     //cout << leftEnemy << ' ' << rightEnemy << ' ' << topEnemy << ' ' << bottomEnemy << endl;
     //cout << yolk->posX << ' ' << yolk->posX + yolk->width << ' ' << yolk->posY << ' ' << yolk->posY + yolk->height << endl;

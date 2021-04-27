@@ -25,9 +25,9 @@ void Radish::setPos()
 
 //int LEFT_MAX = 5;
 
-void Radish::move()
+void Radish::move(double mul)
 {
-    posY += velY;
+    posY += (velY * mul);
     if (dir == RIGHT){
         if (time == MAX_MOVE){
             time = 0;
@@ -50,20 +50,21 @@ void Radish::move()
 
 bool Radish::checkCollision(Yolk* yolk)
 {
-    collider.w = (RADISH_WIDTH*3)/5;
-    collider.h = (RADISH_HEIGHT*3)/5;
-    collider.x = posX + (collider.w/2);
-    collider.y = posY + (collider.h/2);
+    if (yolk->state == PAUSE_1) return false;
+    collider.w = (RADISH_WIDTH*1)/2;
+    collider.h = (RADISH_HEIGHT*1)/2;
+    collider.x = posX + (RADISH_WIDTH/4);
+    collider.y = posY + (RADISH_HEIGHT/4);
     //cout << collider.w << ' ' << collider.h << ' ' << collider.x << ' ' << collider.y << endl;
-    Enemy::checkCollision(yolk);
+    return Enemy::checkCollision(yolk);
 }
 
-void Radish::render(SDL_Renderer* renderer, bool& quit)
+void Radish::render(SDL_Renderer* renderer, STATE state)
 {
     srcRect = enemyMat.getSprite(RADISH, RUN, frame/FRAME_VALUE);
     dstRect = {posX, posY, width, height};
     enemyMat.render(renderer, texture, srcRect, dstRect);
-    if (!quit) frame++;
+    if (state != HIT_2) frame++;
     if (frame/FRAME_VALUE >= TOTAL_RADISH_SPRITE) frame = 0;
 }
 

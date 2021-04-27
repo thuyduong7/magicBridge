@@ -34,12 +34,12 @@
 		</Compiler>
 		<Unit filename="Background.cpp" />
 		<Unit filename="Background.h" />
-		<Unit filename="Ball.cpp" />
-		<Unit filename="Ball.h" />
 		<Unit filename="Bird.cpp" />
 		<Unit filename="Bird.h" />
 		<Unit filename="Bridge.cpp" />
 		<Unit filename="Bridge.h" />
+		<Unit filename="Button.cpp" />
+		<Unit filename="Button.h" />
 		<Unit filename="Coin.cpp" />
 		<Unit filename="Coin.h" />
 		<Unit filename="Core.cpp" />
@@ -50,12 +50,18 @@
 		<Unit filename="Game.h" />
 		<Unit filename="Materials.cpp" />
 		<Unit filename="Materials.h" />
+		<Unit filename="Music.cpp" />
+		<Unit filename="Music.h" />
 		<Unit filename="Radish.cpp" />
 		<Unit filename="Radish.h" />
 		<Unit filename="Spike.cpp" />
 		<Unit filename="Spike.h" />
 		<Unit filename="SpikeBall.cpp" />
 		<Unit filename="SpikeBall.h" />
+		<Unit filename="Text.cpp" />
+		<Unit filename="Text.h" />
+		<Unit filename="Timer.cpp" />
+		<Unit filename="Timer.h" />
 		<Unit filename="Yolk.cpp" />
 		<Unit filename="Yolk.h" />
 		<Unit filename="main.cpp" />

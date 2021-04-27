@@ -22,12 +22,11 @@ int main(int argc, char* argv[])
         }
         else{
             bool quit = false;
-            bool die = false;
-            Uint32 startRoundTime = SDL_GetTicks();
-            while (!quit || quit && !die){
+            //bool die = false;
+            while (!quit){
                 Uint32 startTime = SDL_GetTicks();
                 core.handleEvent(quit);
-                core.render(quit,die);
+                core.render(quit);
                 Uint32 frameTime = SDL_GetTicks() - startTime;
                 if (frameTime < DELAY_TIME){
                     SDL_Delay((int)(DELAY_TIME - frameTime));

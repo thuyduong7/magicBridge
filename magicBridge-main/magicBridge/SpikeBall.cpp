@@ -1,5 +1,25 @@
 #include "SpikeBall.h"
 
+Ball::Ball() : Enemy(SPIKEBALL)
+{
+    setBall = false;
+}
+
+Ball::~Ball()
+{
+
+}
+
+void Ball::render(SDL_Renderer* renderer, STATE state)
+{
+    dstRect = {posX, posY, width, height};
+    enemyMat.render(renderer, texture, srcRect, dstRect);
+}
+
+void Ball::free()
+{
+    Enemy::free();
+}
 
 SpikeBall::SpikeBall():Enemy(SPIKEBALL)
 {
@@ -12,10 +32,12 @@ SpikeBall::SpikeBall():Enemy(SPIKEBALL)
     }
     coin = new Coin[MAX_ROWS];
     setCoin = false;
+    _music.loadMusic();
 }
 
 SpikeBall::~SpikeBall()
 {
+    _music.free();
     for (int i = 0; i < MAX_ROWS; i++){
         delete ball[i];
     }
@@ -45,8 +67,8 @@ void SpikeBall::setPos()
             //else if (setCoin) ball[i][j]
         }
     }
-    for (int i = 0; i < numOfRows; i++) cout << coin[i].posY << endl;
-    cout << posY << endl;
+    //for (int i = 0; i < numOfRows; i++) cout << coin[i].posY << endl;
+    //cout << posY << endl;
     if (setCoin){
         for (int i = 0; i < numOfRows; i++){
             fcoin.push_back(new Coin);
@@ -55,21 +77,22 @@ void SpikeBall::setPos()
             fcoin[i]->posY = ball[i][0].posY + (SPIKEBALL_HEIGHT - COIN_HEIGHT)/2;
         }
     }
-    for (int i = 0; i < numOfRows; i++) cout << coin[i].posY << endl;
+    //for (int i = 0; i < numOfRows; i++) cout << coin[i].posY << endl;
     height = numOfRows * SPIKEBALL_HEIGHT;
 }
 
-void SpikeBall::move()
+void SpikeBall::move(double mul)
 {
-    posY += velY;
+    posY += (velY * mul);
     for (int i = 0; i < numOfRows; i++){
         for (int j = 0; j < NUM_OF_COLS; j++){
-            ball[i][j].posY += velY;
+            ball[i][j].posY += (velY * mul);
         }
     }
     if (setCoin){
+        //cout << fcoin.size();
         for (int i = 0; i < fcoin.size(); i++){
-            fcoin[i]->move();
+            fcoin[i]->move(mul);
             if (fcoin[i]->posY > SCREEN_HEIGHT) {
                     delete fcoin[i];
                     fcoin.erase(fcoin.begin() + i);
@@ -84,12 +107,15 @@ bool SpikeBall::checkCollision(Yolk* yolk)
     if (setCoin){
         for (int i = fcoin.size() - 1; i >= 0; i--){
             if (fcoin[i]->checkCollision(yolk)){
+                Mix_PlayChannel(-1,_music.eatCoin,0);
                 delete fcoin[i];
                 fcoin.erase(fcoin.begin() + i);
                 yolk->numOfCoins++;
             }
         }
     }
+
+    if (yolk->state == PAUSE_1) return false;
 
     // collider here is the blank space where the main character can go through between two blocks of balls
     // "+/-SPIKEBALL_HEIGHT", "+/-SPIKEBALL_HEIGHT/2" will make the collision look like real
@@ -140,16 +166,16 @@ bool SpikeBall::checkCollision(Yolk* yolk)
 
 
 
-void SpikeBall::render(SDL_Renderer* renderer, bool& quit)
+void SpikeBall::render(SDL_Renderer* renderer, STATE state)
 {
     for (int i = 0; i < numOfRows; i++){
         for (int j = 0; j < NUM_OF_COLS; j++){
-            if ( ball[i][j].setBall ) ball[i][j].render(renderer,quit);
+            if ( ball[i][j].setBall ) ball[i][j].render(renderer, state);
         }
     }
     if (setCoin){
         for (int i = 0; i < fcoin.size(); i++){
-            fcoin[i]->render(renderer,quit);
+            fcoin[i]->render(renderer, state);
         }
     }
 }

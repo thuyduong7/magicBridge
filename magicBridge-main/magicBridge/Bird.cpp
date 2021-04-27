@@ -27,24 +27,24 @@ void Bird::setPos()
     cout << dir << ' ' << minX << ' ' << maxX << ' ' << posX << endl;
 }
 
-void Bird::move()
+void Bird::move(double mul)
 {
 
-    posY += BIRD_VEL_Y;
+    posY += (velY * mul);
 
     if (dir == RIGHT){
-        posX += BIRD_VEL_X;
+        posX += (BIRD_VEL_X * mul);
         if (posX < minX || posX > maxX){
             dir = LEFT;
-            posX -= BIRD_VEL_X;
+            posX -= (BIRD_VEL_X * mul);
         }
         flip = SDL_FLIP_NONE;
     }
     else if (dir == LEFT){
-        posX -= BIRD_VEL_X;
+        posX -= (BIRD_VEL_X * mul);
         if (posX < minX || posX > maxX){
             dir = RIGHT;
-            posX += BIRD_VEL_X;
+            posX += (BIRD_VEL_X * mul);
         }
         flip = SDL_FLIP_HORIZONTAL;
     }
@@ -52,20 +52,21 @@ void Bird::move()
 
 bool Bird::checkCollision(Yolk* yolk)
 {
-    collider.w = (BIRD_WIDTH*1)/2;
-    collider.h = (BIRD_HEIGHT*1)/2;
-    collider.x = posX + (collider.w/2);
-    collider.y = posY + (collider.h/2);
+    if (yolk->state == PAUSE_1) return false;
+    collider.w = (BIRD_WIDTH*3)/5;
+    collider.h = (BIRD_HEIGHT*3)/5;
+    collider.x = posX;
+    collider.y = posY;
     //cout << collider.w << ' ' << collider.h << ' ' << collider.x << ' ' << collider.y << endl;
     Enemy::checkCollision(yolk);
 }
 
-void Bird::render(SDL_Renderer* renderer, bool& quit)
+void Bird::render(SDL_Renderer* renderer, STATE state)
 {
     srcRect = enemyMat.getSprite(BIRD, RUN, frame/FRAME_VALUE);
     dstRect = {posX, posY, width, height};
     enemyMat.render(renderer, texture, srcRect, dstRect, flip);
-    if (!quit) frame++;
+    if (state != HIT_2) frame++;
     if (frame/FRAME_VALUE >= (TOTAL_BIRD_SPRITE)) frame = 0;
 }
 

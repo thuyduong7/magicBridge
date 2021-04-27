@@ -24,8 +24,8 @@ struct Bridge
     Bridge();
     ~Bridge();
 
-    void setDir(DIRECTION _dir);
-    bool checkDir(Bridge* bridge);
+    bool move(Bridge* bridge);
+    //bool checkDir(Bridge* bridge);
     void update();
     void render(SDL_Renderer* renderer);
 

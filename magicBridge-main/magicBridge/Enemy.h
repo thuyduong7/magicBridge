@@ -24,22 +24,20 @@ const int SPIKEBALL_HEIGHT = 40;
 const int COIN_WIDTH = 28;
 const int COIN_HEIGHT = 37;
 
-
 const double VEL_Y = 3;
 const double SPIKE_VEL_Y = 2.5;
-
-//struct Yolk;
 
 struct Enemy
 {
     Enemy(){};
     Enemy(MAT_TYPE _type);
+    ~Enemy(){};
     //SDL_Texture* getTexture();
     virtual void setPos(){};
-    virtual void move(){};
+    virtual void move(double mul){};
     virtual bool checkCollision(Yolk* yolk);
     //virtual void increaseVelY();
-    virtual void render(SDL_Renderer* renderer, bool& quit){};
+    virtual void render(SDL_Renderer* renderer, STATE state){};
     virtual void free();
 
     MAT_TYPE type;
@@ -52,6 +50,7 @@ struct Enemy
     SDL_Rect srcRect, dstRect;
     SDL_Rect collider;
     int frame;
+    double multiple;
 };
 
 #endif // ENEMY_H

@@ -21,17 +21,14 @@ Bridge::~Bridge()
 }
 
 
-void Bridge::setDir(DIRECTION _dir)
+bool Bridge::move(Bridge* bridge)
 {
-    dir = _dir;
-}
-
-bool Bridge::checkDir(Bridge* bridge)
-{
-    bool move = false;
+    //dir = _dir;
+    bool moved = false;
     if (bridge->dir == LEFT){
-        move = true;
+        moved = true;
         if (bridge[0].posY < MAX_POS_Y){
+            //move = true;
             for (int i = 0; i < NUM_OF_DOTS; i++){
                 // (i-NUM_OF_DOTS/2) to return a symmetry  ( -5 -4 -3 -2 -1 0 1 2 3 4 5 )
                 // *3 to increase the speed of the bridge coming up and down
@@ -42,8 +39,9 @@ bool Bridge::checkDir(Bridge* bridge)
         //bridge->dir = TOTAL_OF_DIRECTION;
     }
     if (bridge->dir == RIGHT){
-        move = true;
+        //move = true;
         if (bridge[NUM_OF_DOTS-1].posY < MAX_POS_Y){
+            moved = true;
             for (int i = 0; i < NUM_OF_DOTS; i++){
                 // (i-NUM_OF_DOTS/2) to return a symmetry  ( -5 -4 -3 -2 -1 0 1 2 3 4 5 )
                 // *3 to increase the speed of the bridge coming up and down
@@ -53,8 +51,7 @@ bool Bridge::checkDir(Bridge* bridge)
         }
         //bridge->dir = TOTAL_OF_DIRECTION;
     }
-
-    return move;
+    return moved;
 }
 
 void Bridge::render(SDL_Renderer* renderer)
