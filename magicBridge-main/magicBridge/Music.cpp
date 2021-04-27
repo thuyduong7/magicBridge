@@ -13,7 +13,7 @@ bool Music::loadMusic()
         cout << "Failed to load start theme song! SDL_mixer Error: " << Mix_GetError();
         success = false;
     }
-    themeSong = Mix_LoadMUS("Music/RetroTheme1.wav");
+    themeSong = Mix_LoadMUS("Music/themeSong.wav");
     if(themeSong == NULL)
     {
         cout << "Failed to load theme song! SDL_mixer Error: " << Mix_GetError();
@@ -42,7 +42,7 @@ bool Music::loadMusic()
         success = false;
     }
 
-    hit = Mix_LoadWAV( "Music/hit1.wav" );
+    hit = Mix_LoadWAV( "Music/hit.wav" );
     if( hit == NULL )
     {
         cout << "Failed to load hit effect! SDL_mixer Error: " << Mix_GetError();
@@ -63,6 +63,13 @@ bool Music::loadMusic()
         success = false;
     }
 
+    showScore = Mix_LoadWAV( "Music/showScore.wav" );
+    if( showScore == NULL )
+    {
+        cout << "Failed to load show score effect! SDL_mixer Error: " << Mix_GetError();
+        success = false;
+    }
+
     return success;
 }
 
@@ -75,6 +82,7 @@ void Music::free()
 	Mix_FreeChunk(hit);
 	Mix_FreeChunk(eatCoin);
 	Mix_FreeChunk(die);
+	Mix_FreeChunk(showScore);
     moveBridge = NULL;
     pressStart = NULL;
     click = NULL;

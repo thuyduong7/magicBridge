@@ -53,7 +53,7 @@ SDL_Rect coinSprite[TOTAL_COIN_SPRITE];
 bool Materials::load(SDL_Renderer* renderer)
 {
     //Load background texture
-    backgroundTexture = loadFromFile("Assets/Background/Background1.png", renderer);
+    backgroundTexture = loadFromFile("Assets/Background/Background.png", renderer);
     if (backgroundTexture == NULL){
         cout << "Fail to load background\n";
         return false;
@@ -163,7 +163,7 @@ bool Materials::load(SDL_Renderer* renderer)
     }
 
     //Load dot texture
-    dot = loadFromFile("Assets/Dot1.png", renderer);
+    dot = loadFromFile("Assets/Dot.png", renderer);
     if (dot == NULL){
         cout << "Fail to load dot\n";
         return false;

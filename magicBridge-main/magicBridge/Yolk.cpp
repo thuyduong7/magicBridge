@@ -196,7 +196,6 @@ void Yolk::render(SDL_Renderer* renderer)
             else posY += 3;
             break;
         }
-
     }
     if ( (dir == RIGHT && change_dir == false) || (dir == LEFT && change_dir == true) ||
         (posX == MAX_POS_X - YOLK_WIDTH) || (last_dir == RIGHT && gap == 0) )
@@ -205,7 +204,7 @@ void Yolk::render(SDL_Renderer* renderer)
     yolkMat.setAlpha(texture, a);
     yolkMat.render(renderer, texture, srcRect, dstRect, flip);
     if (hit){
-        SDL_Delay(300);
+        SDL_Delay(500);
         hit = false;
     }
     if (dir != TOTAL_OF_DIRECTION) frame++;

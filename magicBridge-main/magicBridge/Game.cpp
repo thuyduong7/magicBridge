@@ -106,6 +106,7 @@ void handleEventStart(const SDL_Event& e, const Music& music, MODE& mode, bool& 
     quitButton->handleEvent(e);
     if (startButton->click){
         Mix_PlayChannel(-1, music.pressStart, 0);
+        SDL_Delay(200);
         mode = PLAYING;
         timer.start();
         Mix_PausedMusic();
@@ -196,7 +197,8 @@ void handleEventEnd(const SDL_Event& e, const Music& music, MODE& mode)
 {
     continueButton->handleEvent(e);
     if (continueButton->click){
-        Mix_PlayChannel(-1, music.click, 0);
+        Mix_PlayChannel(-1, music.showScore, 0);
+        SDL_Delay(400);
         mode = START;
         //Free all remain enemies and coins
         for (vector <Enemy*>::iterator it = enemy.begin(); it != enemy.end();){
@@ -213,7 +215,6 @@ void loop(const Music& music, MODE& mode)
 {
     if (yolk->state == HIT_2){
         if (yolk->posY > SCREEN_HEIGHT){
-            Mix_PauseMusic();
             timer.stop();
             mode = END;
         }
@@ -255,7 +256,10 @@ void loop(const Music& music, MODE& mode)
     for (int i = 0; i < enemy.size(); i++){
         if (enemy[i]->checkCollision(yolk)){
             if (yolk->state == PLAY) Mix_PlayChannel(-1, music.hit, 0);
-            else Mix_PlayChannel(-1, music.die, 0);
+            else {
+                Mix_PauseMusic();
+                Mix_PlayChannel(-1, music.die, 0);
+            }
             yolk->handleCollision();
             break;
         }

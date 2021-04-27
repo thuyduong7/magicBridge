@@ -19,6 +19,7 @@ struct Music
     Mix_Chunk* hit = NULL;
     Mix_Chunk* eatCoin = NULL;
     Mix_Chunk* die = NULL;
+    Mix_Chunk* showScore = NULL;
 };
 
 #endif // MUSIC_H
