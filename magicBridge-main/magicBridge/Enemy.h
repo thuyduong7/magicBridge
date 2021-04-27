@@ -3,8 +3,9 @@
 
 #include <SDL.h>
 
+#include "Core.h"
 #include "Materials.h"
-#include "Bridge.h"
+//#include "Bridge.h"
 #include "Yolk.h"
 
 const int FRAME_VALUE = 6;
@@ -17,6 +18,7 @@ const int SPIKE_HEIGHT = 78;
 
 const int BIRD_WIDTH = 85;
 const int BIRD_HEIGHT = 61;
+const int MIN_BIRD_DISTANCE = PLAYING_SCREEN_WIDTH * 1/3;
 
 const int SPIKEBALL_WIDTH = 40;
 const int SPIKEBALL_HEIGHT = 40;

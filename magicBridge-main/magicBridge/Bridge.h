@@ -6,6 +6,7 @@
 
 #include "Materials.h"
 
+//Bridge includes 9 dots
 const int NUM_OF_DOTS = 9;
 
 enum DIRECTION
@@ -25,7 +26,6 @@ struct Bridge
     ~Bridge();
 
     bool move(Bridge* bridge);
-    //bool checkDir(Bridge* bridge);
     void update();
     void render(SDL_Renderer* renderer);
 

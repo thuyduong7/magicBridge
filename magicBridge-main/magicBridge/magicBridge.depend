@@ -109,29 +109,24 @@
 	"Enemy.h"
 	"Core.h"
 
-1619446782 source:g:\magicbridge-main\magicbridge\background.cpp
+1619547458 source:g:\magicbridge-main\magicbridge\background.cpp
 	"Background.h"
 	"Core.h"
 
-1619446864 g:\magicbridge-main\magicbridge\background.h
+1619547458 g:\magicbridge-main\magicbridge\background.h
 	<SDL.h>
 	"Materials.h"
 
-1619446313 g:\magicbridge-main\magicbridge\materials.h
+1619539264 g:\magicbridge-main\magicbridge\materials.h
 	<iostream>
 	<SDL.h>
 	<SDL_image.h>
 
-1619342530 g:\magicbridge-main\magicbridge\core.h
+1619537022 g:\magicbridge-main\magicbridge\core.h
 	<iostream>
 	<SDL.h>
-	<SDL_image.h>
-	<SDL_mixer.h>
-	<SDL_ttf.h>
-	"Game.h"
 
-1619508590 g:\magicbridge-main\magicbridge\game.h
-	"Core.h"
+1619539392 g:\magicbridge-main\magicbridge\game.h
 	"Materials.h"
 	"Music.h"
 	"Background.h"
@@ -146,21 +141,23 @@
 	"Timer.h"
 	"Text.h"
 	"Button.h"
+	<fstream>
+	<vector>
 
-1619506324 g:\magicbridge-main\magicbridge\bridge.h
+1619536538 g:\magicbridge-main\magicbridge\bridge.h
 	<SDL.h>
 	<SDL_image.h>
 	"Materials.h"
 
-1619505090 g:\magicbridge-main\magicbridge\yolk.h
+1619538505 g:\magicbridge-main\magicbridge\yolk.h
 	<SDL.h>
 	<cmath>
 	"Bridge.h"
 
-1619270691 g:\magicbridge-main\magicbridge\enemy.h
+1619536959 g:\magicbridge-main\magicbridge\enemy.h
 	<SDL.h>
+	"Core.h"
 	"Materials.h"
-	"Bridge.h"
 	"Yolk.h"
 
 1619022117 g:\magicbridge-main\magicbridge\radish.h
@@ -171,38 +168,34 @@
 	"Enemy.h"
 	"Core.h"
 
-1619022117 g:\magicbridge-main\magicbridge\bird.h
+1619536420 g:\magicbridge-main\magicbridge\bird.h
 	"Enemy.h"
 	"Core.h"
 
-1619031272 source:g:\magicbridge-main\magicbridge\bird.cpp
+1619536420 source:g:\magicbridge-main\magicbridge\bird.cpp
 	"Bird.h"
 
-1619506324 source:g:\magicbridge-main\magicbridge\bridge.cpp
+1619536538 source:g:\magicbridge-main\magicbridge\bridge.cpp
 	"Bridge.h"
 	"Core.h"
 
-1619447803 source:g:\magicbridge-main\magicbridge\core.cpp
+1619538735 source:g:\magicbridge-main\magicbridge\core.cpp
 	"Core.h"
+	"Game.h"
 	"Materials.h"
 	"Music.h"
 
-1619070904 source:g:\magicbridge-main\magicbridge\enemy.cpp
+1619536562 source:g:\magicbridge-main\magicbridge\enemy.cpp
 	"Enemy.h"
-	"Core.h"
 
-1619507209 source:g:\magicbridge-main\magicbridge\game.cpp
+1619546411 source:g:\magicbridge-main\magicbridge\game.cpp
 	"Game.h"
-	<iostream>
-	<fstream>
-	<vector>
 
-1618914622 source:g:\magicbridge-main\magicbridge\main.cpp
-	<iostream>
+1619536201 source:g:\magicbridge-main\magicbridge\main.cpp
 	<ctime>
 	"Core.h"
 
-1619446518 source:g:\magicbridge-main\magicbridge\materials.cpp
+1619539320 source:g:\magicbridge-main\magicbridge\materials.cpp
 	"Materials.h"
 	"Yolk.h"
 	"Enemy.h"
@@ -215,7 +208,7 @@
 1619068524 source:g:\magicbridge-main\magicbridge\spike.cpp
 	"Spike.h"
 
-1619506461 source:g:\magicbridge-main\magicbridge\yolk.cpp
+1619538505 source:g:\magicbridge-main\magicbridge\yolk.cpp
 	"Yolk.h"
 	"Core.h"
 	"Materials.h"
@@ -383,7 +376,7 @@
 1619071624 source:g:\magicbridge-main\magicbridge\timer.cpp
 	"Timer.h"
 
-1619447171 source:g:\magicbridge-main\magicbridge\music.cpp
+1619534835 source:g:\magicbridge-main\magicbridge\music.cpp
 	"Music.h"
 	<iostream>
 
@@ -420,11 +413,11 @@
 1619335941 source:g:\magicbridge-main\magicbridge\mode_manager.cpp
 	"Mode_Manager.h"
 
-1619361683 g:\magicbridge-main\magicbridge\button.h
+1619539298 g:\magicbridge-main\magicbridge\button.h
 	<SDL.h>
 	<SDL_image.h>
 	"Materials.h"
 
-1619361683 source:g:\magicbridge-main\magicbridge\button.cpp
+1619539275 source:g:\magicbridge-main\magicbridge\button.cpp
 	"Button.h"
 

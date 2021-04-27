@@ -1,7 +1,6 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "Core.h"
 #include "Materials.h"
 #include "Music.h"
 #include "Background.h"
@@ -17,59 +16,22 @@
 #include "Text.h"
 #include "Button.h"
 
-enum MODE
-{
-    START,
-    PLAYING,
-    HELP,
-    PAUSE,
-    END
-};
+#include <fstream>
+#include <vector>
 
-
-struct Game
-{
-    Game();
-    bool init();
-    void handleEventStart(SDL_Event& e, const Music& music, int& mode, bool& quit);
-    void handleEventHelp(SDL_Event& e, const Music& music, int& mode);
-    void handleEventPlaying(SDL_Event& e, const Music& music, int& mode, bool& quit);
-    void handleEventEnd(SDL_Event& e, const Music& music, int& mode);
-    void handleEventPause(SDL_Event& e, const Music& music, int& mode);
-    void loop(bool& quit, const Music& music, int& mode);
-    void update();
-    void start(SDL_Renderer* renderer, bool& quit, const Music& music);
-    void help(SDL_Renderer* renderer, bool& quit, const Music& music);
-    void playing(SDL_Renderer* renderer, bool& quit);
-    void pause(SDL_Renderer* renderer, bool& quit);
-    void end(SDL_Renderer* renderer, bool& quit);
-    void free();
-
-    //Background
-    Background* background;
-    Background* backgroundLayer1;
-    Background* backgroundLayer2;
-    Background* backgroundLayer3;
-    Background* backgroundLayer4;
-    Background* introBackground;
-
-    //Buttons
-    Button* startButton;
-    Button* helpButton;
-    Button* pauseButton;
-    Button* continueButton;
-    Button* quitButton;
-
-    //Bridge comprises of 11 dots
-    Bridge* bridge;
-    Yolk* yolk;
-    Timer timer;
-    Text text;
-
-    double mul;
-    int round, highScore, lastMode;
-    int min_distance;
-    //DIRECTION cur_dir, last_cur_dir;
-};
+bool initGame();
+void handleEventStart(const SDL_Event& e, const Music& music, MODE& mode, bool& quit);
+void handleEventHelp(const SDL_Event& e, const Music& music, MODE& mode);
+void handleEventPlaying(const SDL_Event& e, const Music& music, MODE& mode, bool& quit);
+void handleEventEnd(const SDL_Event& e, const Music& music, MODE& mode);
+void handleEventPause(const SDL_Event& e, const Music& music, MODE& mode);
+void loop(const Music& music, MODE& mode);
+void update();
+void start(SDL_Renderer* renderer, const Music& music);
+void help(SDL_Renderer* renderer, const Music& music);
+void playing(SDL_Renderer* renderer);
+void pause(SDL_Renderer* renderer);
+void end(SDL_Renderer* renderer);
+void freeGame();
 
 #endif // GAME_H

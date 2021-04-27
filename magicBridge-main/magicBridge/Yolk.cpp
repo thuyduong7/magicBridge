@@ -167,7 +167,7 @@ void Yolk::blend(Uint32 pauseTime)
     //cout << int(a) << ' ' << change << endl;
 }
 
-void Yolk::render(SDL_Renderer* renderer, Bridge* bridge, bool& quit)
+void Yolk::render(SDL_Renderer* renderer)
 {
     dstRect = {posX, posY, width, height};
     SDL_RendererFlip flip = SDL_FLIP_NONE;
@@ -199,7 +199,6 @@ void Yolk::render(SDL_Renderer* renderer, Bridge* bridge, bool& quit)
                 time++;
             }
             else posY += 3;
-            //if (posY > SCREEN_HEIGHT) quit = true;
             break;
         }
 

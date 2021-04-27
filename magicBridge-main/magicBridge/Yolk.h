@@ -39,7 +39,7 @@ struct Yolk
         void handleCollision();
         void checkState();
         void blend(Uint32 pauseTime);
-        void render(SDL_Renderer* renderer, Bridge* bridge, bool& quit);
+        void render(SDL_Renderer* renderer);
 
         int width, height;
         double posX, posY;

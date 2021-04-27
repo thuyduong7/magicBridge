@@ -1,7 +1,6 @@
 #include "Background.h"
 #include "Core.h"
 
-//Background
 Background::Background(MAT_TYPE _type)
 {
     texture = backgroundMat.getTexture(_type);
@@ -12,11 +11,19 @@ Background::Background(MAT_TYPE _type)
     srcRect = {posX, posY, width, height};
     offset = 0;
     frame = 0;
+    if (_type == BACKGROUND) vel = BACKGROUND_VEL;
+    else vel = BACKGROUND_LAYER_VEL;
 }
 
 Background::~Background()
 {
 
+}
+
+void Background::move(const double mul)
+{
+    offset += (vel * mul);
+    if(offset > height) offset = 0;
 }
 
 void Background::render(SDL_Renderer* renderer)

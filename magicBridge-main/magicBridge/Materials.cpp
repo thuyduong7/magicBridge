@@ -10,6 +10,7 @@ SDL_Texture* backgroundLayer1Texture;
 SDL_Texture* backgroundLayer2Texture;
 SDL_Texture* backgroundLayer3Texture;
 SDL_Texture* backgroundLayer4Texture;
+SDL_Texture* backgroundLayer5Texture;
 SDL_Texture* introTexture;
 SDL_Rect introSprite[TOTAL_INTRO_SPRITE];
 
@@ -50,7 +51,7 @@ SDL_Rect coinSprite[TOTAL_COIN_SPRITE];
 bool Materials::load(SDL_Renderer* renderer)
 {
     //Load background texture
-    backgroundTexture = loadFromFile("Assets/Background/Background.png", renderer);
+    backgroundTexture = loadFromFile("Assets/Background/Background1.png", renderer);
     if (backgroundTexture == NULL){
         cout << "Fail to load background\n";
         return false;
@@ -77,6 +78,12 @@ bool Materials::load(SDL_Renderer* renderer)
     backgroundLayer4Texture = loadFromFile("Assets/Background/BackgroundLayer4.png", renderer);
     if (backgroundLayer4Texture == NULL){
         cout << "Fail to load background layer 4\n";
+        return false;
+    }
+
+    backgroundLayer5Texture = loadFromFile("Assets/Background/BackgroundLayer5.png", renderer);
+    if (backgroundLayer5Texture == NULL){
+        cout << "Fail to load background layer 5\n";
         return false;
     }
 
@@ -279,6 +286,8 @@ SDL_Texture* Materials::getTexture(MAT_TYPE type)
             return backgroundLayer3Texture;
         case BACKGROUNDLAYER4:
             return backgroundLayer4Texture;
+        case BACKGROUNDLAYER5:
+            return backgroundLayer5Texture;
         case INTRO:
             return introTexture;
 
@@ -372,6 +381,7 @@ void Materials::free()
     SDL_DestroyTexture(backgroundLayer2Texture);
     SDL_DestroyTexture(backgroundLayer3Texture);
     SDL_DestroyTexture(backgroundLayer4Texture);
+    SDL_DestroyTexture(backgroundLayer5Texture);
     SDL_DestroyTexture(introTexture);
 
     SDL_DestroyTexture(startButtonTexture);

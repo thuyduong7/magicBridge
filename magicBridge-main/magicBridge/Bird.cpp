@@ -1,8 +1,5 @@
 #include "Bird.h"
 
-double BIRD_VEL_X = 1;
-double BIRD_VEL_Y = 3;
-
 Bird::Bird() : Enemy(BIRD)
 {
     posY = -BIRD_HEIGHT;

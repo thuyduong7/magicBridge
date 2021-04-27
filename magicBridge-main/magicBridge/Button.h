@@ -34,10 +34,10 @@ struct Button
     Button(MAT_TYPE _type);
 
     //Sets top left position
-    void setPosition( int x, int y );
+    void setPosition(const int& x, const int& y);
 
     //Handles mouse event
-    void handleEvent( SDL_Event& e );
+    void handleEvent(const SDL_Event& e);
 
     //Shows button sprite
     void render(SDL_Renderer* renderer);

@@ -2,8 +2,6 @@
 
 #include "Core.h"
 
-//Bridge includes 11 dots
-
 Bridge::Bridge()
 {
     width = DOT_WIDTH;
@@ -17,7 +15,7 @@ Bridge::Bridge()
 
 Bridge::~Bridge()
 {
-    //SDL_DestroyTexture(texture);
+
 }
 
 

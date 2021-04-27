@@ -13,7 +13,7 @@ bool Music::loadMusic()
         cout << "Failed to load start theme song! SDL_mixer Error: " << Mix_GetError();
         success = false;
     }
-    themeSong = Mix_LoadMUS("Music/themeSong3.wav");
+    themeSong = Mix_LoadMUS("Music/RetroTheme1.wav");
     if(themeSong == NULL)
     {
         cout << "Failed to load theme song! SDL_mixer Error: " << Mix_GetError();

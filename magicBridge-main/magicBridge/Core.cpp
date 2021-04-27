@@ -1,25 +1,20 @@
 #include "Core.h"
+#include "Game.h"
 #include "Materials.h"
 #include "Music.h"
 
-using namespace std;
-
-SDL_Renderer* renderer = NULL;
-SDL_Window* window = NULL;
-Game game;
 Materials material;
 Music music;
 
 Core::Core()
 {
-    //quit = false;
-    mode = 1;
+    mode = START;
 }
 
 Core::~Core(){}
 
 //Initiailize SDL
-bool Core::init(const char* gameTitle, const int SCREEN_WIDTH, const int SCREEN_HEIGHT)
+bool Core::init(const char* gameTitle, const int& SCREEN_WIDTH, const int& SCREEN_HEIGHT)
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
         cout << "Fail to initialize SDL. SDL_Error: " << SDL_GetError();
@@ -46,6 +41,7 @@ bool Core::init(const char* gameTitle, const int SCREEN_WIDTH, const int SCREEN_
         cout << "SDL_mixer could not initialize! SDL_mixer Error: " << Mix_GetError();
         return false;
     }
+    // Initialize SDL_ttf
     if (TTF_Init() == -1){
         cout << "SDL_ttf could not initialize! SDL_ttf Error: " << TTF_GetError();
         return false;
@@ -55,7 +51,7 @@ bool Core::init(const char* gameTitle, const int SCREEN_WIDTH, const int SCREEN_
 
 bool Core::loadMedia()
 {
-    //Load all needed materials for the game
+    //Load all materials for the game
     if (!material.load(renderer)){
         return false;
     }
@@ -64,7 +60,7 @@ bool Core::loadMedia()
         return false;
     }
     //Initialize characters, objects,...
-    if (!game.init()){
+    if (!initGame()){
         cout << "Fail to initialize game.";
         return false;
     }
@@ -73,82 +69,77 @@ bool Core::loadMedia()
 
 void Core::handleEvent(bool& quit)
 {
-    if (quit) return;
-
     SDL_Event e;
     while (SDL_PollEvent(&e) != 0){
         if (e.type == SDL_QUIT){
             quit = true;
         }
-
         else{
             switch (mode)
             {
-                case 1:
-                    game.handleEventStart(e,music,mode,quit);
+                case START:
+                    handleEventStart(e,music,mode,quit);
                     break;
 
-                case 2:
-                    game.handleEventPlaying(e,music,mode,quit);
+                case PLAYING:
+                    handleEventPlaying(e,music,mode,quit);
                     break;
 
-                case 3:
-                    game.handleEventHelp(e,music,mode);
+                case HELP:
+                    handleEventHelp(e,music,mode);
                     break;
 
-                case 4:
-                    game.handleEventPause(e,music,mode);
+                case PAUSE:
+                    handleEventPause(e,music,mode);
                     break;
 
-                case 5:
-                    game.handleEventEnd(e,music,mode);
+                case END:
+                    handleEventEnd(e,music,mode);
                     break;
             }
         }
     }
-    if (mode == 2) game.loop(quit,music,mode);
+    if (mode == PLAYING) loop(music,mode);
 }
 
 void Core::render(bool& quit)
 {
-        SDL_SetRenderDrawColor(renderer, 0xff, 0xff, 0xff, 0xff);
-        SDL_RenderClear(renderer);
+    SDL_SetRenderDrawColor(renderer, 0xff, 0xff, 0xff, 0xff);
+    SDL_RenderClear(renderer);
 
-        switch (mode)
-            {
-                case 1:
-                    game.start(renderer,quit,music);
-                    break;
+    switch (mode)
+        {
+            case START:
+                start(renderer, music);
+                break;
 
-                case 2:
-                    game.playing(renderer,quit);
-                    game.update();
-                    break;
+            case PLAYING:
+                playing(renderer);
+                update();
+                break;
 
-                case 3:
-                    game.help(renderer,quit,music);
-                    break;
+            case HELP:
+                help(renderer, music);
+                break;
 
-                case 4:
-                    game.pause(renderer,quit);
-                    break;
+            case PAUSE:
+                pause(renderer);
+                break;
 
-                case 5:
-                    game.end(renderer,quit);
-                    break;
-            }
+            case END:
+                end(renderer);
+                break;
+        }
 
-        SDL_RenderPresent(renderer);
-
-        //if (mode == 2) game.update();
-
+    SDL_RenderPresent(renderer);
 }
 
 void Core::close()
 {
     material.free();
-    game.free();
     music.free();
+    freeGame();
+
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     window = NULL;
@@ -156,5 +147,6 @@ void Core::close()
 
     SDL_Quit();
     IMG_Quit();
+    TTF_Quit();
 }
 

@@ -19,6 +19,9 @@ struct Bird : public Enemy
     int minX, maxX;
     int distance;
     SDL_RendererFlip flip;
+
+    double BIRD_VEL_X = 1;
+    double BIRD_VEL_Y = 3;
 };
 
 #endif // BIRD_H

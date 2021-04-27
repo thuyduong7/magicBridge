@@ -1,5 +1,4 @@
 #include "Enemy.h"
-#include "Core.h"
 
 Enemy::Enemy(MAT_TYPE _type)
 {

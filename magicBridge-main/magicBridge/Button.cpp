@@ -1,10 +1,5 @@
 #include "Button.h"
 
-
-//Mouse button sprites
-SDL_Rect gSpriteClips[ BUTTON_SPRITE_TOTAL ];
-//LTexture gButtonSpriteSheetTexture;
-
 Button::Button(MAT_TYPE _type)
 {
 	position.x = 0;
@@ -38,61 +33,32 @@ Button::Button(MAT_TYPE _type)
             position.h = QUIT_BUTTON_HEIGHT;
             break;
 	}
-
-
 	click = false;
-
 	currentSprite = BUTTON_SPRITE_MOUSE_OUT;
 }
 
-void Button::setPosition( int x, int y )
+void Button::setPosition(const int& x, const int& y)
 {
 	position.x = x;
 	position.y = y;
 }
 
-void Button::handleEvent( SDL_Event& e )
+void Button::handleEvent(const SDL_Event& e)
 {
-	//If mouse event happened
-	if( e.type == SDL_MOUSEMOTION || e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP )
-	{
-		//Get mouse position
+	if(e.type == SDL_MOUSEMOTION || e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP){
 		int x, y;
-		SDL_GetMouseState( &x, &y );
+		SDL_GetMouseState(&x, &y);
 
-		//Check if mouse is in button
 		bool inside = true;
 		click = false;
 
-		//Mouse is left of the button
-		if( x < position.x )
-		{
-			inside = false;
-		}
-		//Mouse is right of the button
-		else if( x > position.x + position.w )
-		{
-			inside = false;
-		}
-		//Mouse above the button
-		else if( y < position.y )
-		{
-			inside = false;
-		}
-		//Mouse below the button
-		else if( y > position.y + position.h )
-		{
-			inside = false;
-		}
+		if(x < position.x) inside = false;
+		else if(x > position.x + position.w) inside = false;
+		else if(y < position.y) inside = false;
+		else if(y > position.y + position.h) inside = false;
 
-		//Mouse is outside button
-		if( !inside )
-		{
-			currentSprite = BUTTON_SPRITE_MOUSE_OUT;
-		}
-		//Mouse is inside button
-		else
-		{
+		if(!inside) currentSprite = BUTTON_SPRITE_MOUSE_OUT;
+		else{
             currentSprite = BUTTON_SPRITE_MOUSE_OVER_MOTION;
             if (e.type == SDL_MOUSEBUTTONDOWN) click = true;
 		}
@@ -101,7 +67,6 @@ void Button::handleEvent( SDL_Event& e )
 
 void Button::render(SDL_Renderer* renderer)
 {
-	//Show current button sprite
 	buttonMat.render(renderer, texture, buttonMat.getSprite(type, IDLE, currentSprite) , position);
 }
 
