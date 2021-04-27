@@ -1,8 +1,6 @@
 #ifndef SPIKEBALL_H
 #define SPIKEBALL_H
 
-#include <vector>
-
 #include "Enemy.h"
 #include "Core.h"
 #include "Coin.h"
@@ -25,6 +23,7 @@ struct Ball : public Enemy
     bool setBall;
 };
 
+//A rows of spikeball includes many balls
 struct SpikeBall : public Enemy
 {
     SpikeBall();

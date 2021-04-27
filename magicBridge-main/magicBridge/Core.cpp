@@ -149,4 +149,3 @@ void Core::close()
     IMG_Quit();
     TTF_Quit();
 }
-

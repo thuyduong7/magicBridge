@@ -17,7 +17,6 @@
 #include "Button.h"
 
 #include <fstream>
-#include <vector>
 
 bool initGame();
 void handleEventStart(const SDL_Event& e, const Music& music, MODE& mode, bool& quit);

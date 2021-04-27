@@ -1,9 +1,6 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-#include <SDL.h>
-#include <SDL_image.h>
-
 #include "Materials.h"
 
 const int START_BUTTON_WIDTH = 326;

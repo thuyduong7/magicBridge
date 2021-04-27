@@ -1,9 +1,6 @@
 #ifndef BRIDGE_H
 #define BRIDGE_H
 
-#include <SDL.h>
-#include <SDL_image.h>
-
 #include "Materials.h"
 
 //Bridge includes 9 dots

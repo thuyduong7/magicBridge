@@ -20,10 +20,7 @@ void Radish::setPos()
     // "-int(RADISH_VEL_X * MAX_MOVE)" "+(RADISH_VEL_X * MAX_MOVE)" let enough space for radish to move in zigzag
     posX = rand()%(PLAYING_SCREEN_WIDTH - RADISH_WIDTH - int(RADISH_VEL_X * MAX_MOVE)) + (MIN_POS_X + RADISH_VEL_X * MAX_MOVE);
     defaultPosX = posX;
-    //cout << posX << ' ';
 }
-
-//int LEFT_MAX = 5;
 
 void Radish::move(double mul)
 {
@@ -55,7 +52,6 @@ bool Radish::checkCollision(Yolk* yolk)
     collider.h = (RADISH_HEIGHT*1)/2;
     collider.x = posX + (RADISH_WIDTH/4);
     collider.y = posY + (RADISH_HEIGHT/4);
-    //cout << collider.w << ' ' << collider.h << ' ' << collider.x << ' ' << collider.y << endl;
     return Enemy::checkCollision(yolk);
 }
 
@@ -67,9 +63,3 @@ void Radish::render(SDL_Renderer* renderer, STATE state)
     if (state != HIT_2) frame++;
     if (frame/FRAME_VALUE >= TOTAL_RADISH_SPRITE) frame = 0;
 }
-
-void Radish::free()
-{
-    Enemy::free();
-}
-

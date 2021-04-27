@@ -2,9 +2,6 @@
 #include "Core.h"
 #include "Materials.h"
 
-#include <iostream>
-using namespace std;
-
 Yolk::Yolk(int x, int y)
 {
     width = YOLK_WIDTH;
@@ -20,7 +17,7 @@ Yolk::Yolk(int x, int y)
     frame = 0;
     change_dir = false;
     time = 0;
-    numOfCoins = 0;
+    score = 0;
     a = 255;
     decrease = true;
     change = 0;
@@ -108,7 +105,6 @@ void Yolk::handleCollision()
         time = 0;
         hit = true;
     }
-
 }
 
 void Yolk::checkState()
@@ -164,7 +160,6 @@ void Yolk::blend(Uint32 pauseTime)
             change = 0;
         }
     }
-    //cout << int(a) << ' ' << change << endl;
 }
 
 void Yolk::render(SDL_Renderer* renderer)
@@ -216,4 +211,3 @@ void Yolk::render(SDL_Renderer* renderer)
     if (dir != TOTAL_OF_DIRECTION) frame++;
     if (frame/YOLK_FRAME_VALUE >= TOTAL_YOLK_RUN_SPRITE) frame = 0;
 }
-

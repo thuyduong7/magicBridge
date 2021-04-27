@@ -33,10 +33,8 @@ void Coin::setPos(vector<Enemy*> &enemy)
             }
             if (i == enemy.size()-1) touch = false;
         }
-    }while (touch);
-    //cout << posX << ' ';
+    } while (touch);
 }
-
 
 void Coin::move(double mul)
 {
@@ -49,7 +47,6 @@ bool Coin::checkCollision(Yolk* yolk)
     collider.h = (COIN_HEIGHT*3)/5;
     collider.x = posX;
     collider.y = posY;
-    //cout << collider.w << ' ' << collider.h << ' ' << collider.x << ' ' << collider.y << endl;
     Enemy::checkCollision(yolk);
 }
 
@@ -81,29 +78,13 @@ bool Coin::checkCollisionEnemy(Enemy* enemy)
     topEnemy = enemyCollider.y - SCREEN_HEIGHT/10;
     bottomEnemy = enemyCollider.y + enemyCollider.h + SCREEN_HEIGHT/10;
 
-    //cout << leftCoin << ' ' << rightCoin << ' ' << topCoin << ' ' << bottomCoin << endl;
-    //cout << leftEnemy << ' ' << rightEnemy << ' ' << topEnemy << ' ' << bottomEnemy << endl;
+    if(bottomCoin <= topEnemy) return false;
 
+    if(topCoin >= bottomEnemy) return false;
 
-    if( bottomCoin <= topEnemy )
-    {
-        return false;
-    }
+    if(rightCoin <= leftEnemy) return false;
 
-    if( topCoin >= bottomEnemy )
-    {
-        return false;
-    }
-
-    if( rightCoin <= leftEnemy )
-    {
-        return false;
-    }
-
-    if( leftCoin >= rightEnemy )
-    {
-        return false;
-    }
+    if(leftCoin >= rightEnemy) return false;
     return true;
 }
 
@@ -115,9 +96,3 @@ void Coin::render(SDL_Renderer* renderer, STATE state)
     if (state != HIT_2) frame++;
     if (frame/FRAME_VALUE >= TOTAL_COIN_SPRITE) frame = 0;
 }
-
-void Coin::free()
-{
-    Enemy::free();
-}
-

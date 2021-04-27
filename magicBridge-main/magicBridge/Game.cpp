@@ -1,6 +1,5 @@
 #include "Game.h"
 
-
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -57,7 +56,7 @@ bool initGame()
     backgroundLayer5 = new Background(BACKGROUNDLAYER5);
     introBackground = new Background(INTRO);
 
-    //Buttons
+    //Initialize buttons
     startButton = new Button(START_BUTTON);
     startButton->setPosition((SCREEN_WIDTH - START_BUTTON_WIDTH)/2, BRIDGE_IDLE_HEIGHT + 45);
 
@@ -70,7 +69,6 @@ bool initGame()
 
     continueButton = new Button(CONTINUE_BUTTON);
 
-
     quitButton = new Button(QUIT_BUTTON);
     quitButton->setPosition(SCREEN_WIDTH - QUIT_BUTTON_WIDTH - 5, 10);
 
@@ -78,11 +76,10 @@ bool initGame()
     bridge = new Bridge [NUM_OF_DOTS];
     for (int i = 0; i < NUM_OF_DOTS; i++){
         bridge[i].posX = MIN_POS_X + i * DOT_WIDTH;
-        // 80 gives enough space for bridge to move dowm
         bridge[i].posY = BRIDGE_IDLE_HEIGHT;
-
-        if (bridge[i].texture == NULL)success = false;
+        if (bridge[i].texture == NULL) success = false;
     }
+
     // Set Yolk to stand on the bridge
     yolk = new Yolk((SCREEN_WIDTH - YOLK_WIDTH)/2, bridge[0].posY - YOLK_HEIGHT + STANDING_GAP);
     if (yolk->texture == NULL) success = false;
@@ -92,6 +89,7 @@ bool initGame()
     // Each level will have a particular multiplier of velocity
     level = 0;
     lastMode = START;
+    //The initial minimum distance between two enemies
     min_distance = SCREEN_HEIGHT;
     // Get last high score
     ifstream score("Highscore.txt");
@@ -107,23 +105,22 @@ void handleEventStart(const SDL_Event& e, const Music& music, MODE& mode, bool& 
     helpButton->handleEvent(e);
     quitButton->handleEvent(e);
     if (startButton->click){
-            Mix_PlayChannel(-1, music.pressStart, 0);
-            mode = PLAYING;
-            timer.start();
-            Mix_PausedMusic();
-            Mix_PlayMusic( music.themeSong, -1 );
+        Mix_PlayChannel(-1, music.pressStart, 0);
+        mode = PLAYING;
+        timer.start();
+        Mix_PausedMusic();
+        Mix_PlayMusic( music.themeSong, -1 );
     }
     if (helpButton->click){
-            Mix_PlayChannel(-1, music.click, 0);
-            mode = HELP;
-            lastMode = START;
-            //inHelp = true;
-            timer.pause();
+        Mix_PlayChannel(-1, music.click, 0);
+        mode = HELP;
+        lastMode = START;
+        timer.pause();
     }
     if (quitButton->click){
-            Mix_PlayChannel(-1, music.click, 0);
-            SDL_Delay(200);
-            quit = true;
+        Mix_PlayChannel(-1, music.click, 0);
+        SDL_Delay(200);
+        quit = true;
     }
 }
 
@@ -137,18 +134,16 @@ void handleEventHelp(const SDL_Event& e, const Music& music, MODE& mode)
         else if (lastMode == PLAYING){
             mode = PLAYING;
             timer.unpause();
-            //cout << "UNPAUSE" << ' ' << timer.isPaused() << endl;
         }
-
     }
 }
 
 void handleEventPlaying(const SDL_Event& e, const Music& music, MODE& mode, bool& quit)
 {
-    //when main character dies, mode will be changed to END
     if (yolk->state == HIT_2){
         return;
     }
+    //Handle mouse events
     pauseButton->handleEvent(e);
     helpButton->handleEvent(e);
     quitButton->handleEvent(e);
@@ -167,32 +162,22 @@ void handleEventPlaying(const SDL_Event& e, const Music& music, MODE& mode, bool
         SDL_Delay(200);
         quit = true;
     }
-
+    //Handle key events
     if (e.type == SDL_KEYDOWN){
         if (e.key.keysym.sym == SDLK_LEFT){
             bridge->dir = LEFT;
-            //bridge->setDir(LEFT, bridge);
-            //yolk->setDir(bridge[0].posY - BRIDGE_IDLE_HEIGHT);
         }
         else if (e.key.keysym.sym == SDLK_RIGHT){
             bridge->dir = RIGHT;
-            //bridge->setDir(RIGHT, bridge);
-            //yolk->setDir(bridge[0].posY - BRIDGE_IDLE_HEIGHT);
         }
         if (bridge->move(bridge)) Mix_PlayChannel(-1, music.moveBridge, 0);
     }
     else if (e.type == SDL_KEYUP){
         if (e.key.keysym.sym == SDLK_LEFT){
             bridge->dir = TOTAL_OF_DIRECTION;
-            //bridge->setDir(TOTAL_OF_DIRECTION, bridge);
-            //yolk->setDir(bridge[0].posY - BRIDGE_IDLE_HEIGHT);
-            //yolk->setDir(TOTAL_OF_DIRECTION);
         }
         else if (e.key.keysym.sym == SDLK_RIGHT){
             bridge->dir = TOTAL_OF_DIRECTION;
-            //bridge->setDir(TOTAL_OF_DIRECTION, bridge);
-            //yolk->setDir(bridge[0].posY - BRIDGE_IDLE_HEIGHT);
-            //yolk->setDir(TOTAL_OF_DIRECTION);
         }
     }
 }
@@ -213,6 +198,7 @@ void handleEventEnd(const SDL_Event& e, const Music& music, MODE& mode)
     if (continueButton->click){
         Mix_PlayChannel(-1, music.click, 0);
         mode = START;
+        //Free all remain enemies and coins
         for (vector <Enemy*>::iterator it = enemy.begin(); it != enemy.end();){
             it = enemy.erase(it);
         }
@@ -227,53 +213,33 @@ void loop(const Music& music, MODE& mode)
 {
     if (yolk->state == HIT_2){
         if (yolk->posY > SCREEN_HEIGHT){
+            Mix_PauseMusic();
             timer.stop();
             mode = END;
         }
         return;
     }
+    if(Mix_PausedMusic() == 1) Mix_ResumeMusic();
 
-    if( Mix_PausedMusic() == 1 )
-    {
-        Mix_ResumeMusic();
-    }
-    bridge->move(bridge);
-    yolk->setDir(bridge[0].posY - BRIDGE_IDLE_HEIGHT);
-    yolk->move(bridge);
-    //if (enemy.size() > 0) cout << enemy[0]->posY << endl;
-    if ( (enemy.size() > 0) && ((enemy[0]->posY > SCREEN_HEIGHT) )){
-            delete enemy[0];
-            enemy.erase(enemy.begin());
-    }
-    if ( (coins.size() > 0) && ((coins[0]->posY > SCREEN_HEIGHT) )){
-            delete coins[0];
-            coins.erase(coins.begin());
-    }
     int chance = (rand() % 100) + 1;
-
     if ((( enemy.size() < 1) || ( (enemy.size() > 0) && (enemy[enemy.size()-1]->posY > min_distance) ))
         && (( coins.size() < 1) || ( (coins.size() > 0)
                                 && (coins[coins.size()-1]->posY > 0))) ){
-        if (chance > 80){
-            //cout << "Radish" << endl;
+        if (chance > 75){
             enemy.push_back(new Radish);
             enemy[enemy.size()-1]->setPos();
-            //cout << enemy[enemy.size()-1]->posY;
-        } else if (chance > 60){
-            //cout << "Spike" << endl;
+
+        } else if (chance > 50){
             enemy.push_back(new Spike);
-            //cout << enemy[enemy.size()-1]->posY;
             enemy[enemy.size()-1]->setPos();
-        } else if (chance > 40) {
-            //cout << "Bird" << endl;
+
+        } else if (chance > 25) {
             enemy.push_back(new Bird);
             enemy[enemy.size()-1]->setPos();
-            //cout << enemy[enemy.size()-1]->posY;
-        } else if (chance > 20) {
-            cout << "Spikeball" << endl;
+
+        } else if (chance > 1) {
             enemy.push_back(new SpikeBall);
             enemy[enemy.size()-1]->setPos();
-            //cout << enemy[enemy.size()-1]->posY;
         }
         if (min_distance > SCREEN_HEIGHT/3) min_distance -= SCREEN_HEIGHT/30;
     }
@@ -281,7 +247,6 @@ void loop(const Music& music, MODE& mode)
                                 && (coins[coins.size()-1]->posY > MIN_COIN_DISTANCE))){
         int coinChance = (rand() % 100);
         if (coinChance > 70){
-            //cout << "Coin" << endl;
             coins.push_back(new Coin);
             coins[coins.size()-1]->setPos(enemy);
         }
@@ -289,7 +254,6 @@ void loop(const Music& music, MODE& mode)
 
     for (int i = 0; i < enemy.size(); i++){
         if (enemy[i]->checkCollision(yolk)){
-            //quit = true;
             if (yolk->state == PLAY) Mix_PlayChannel(-1, music.hit, 0);
             else Mix_PlayChannel(-1, music.die, 0);
             yolk->handleCollision();
@@ -297,18 +261,16 @@ void loop(const Music& music, MODE& mode)
         }
     }
 
-    for (int i = 0; i < coins.size(); i++){
+    for (int i = 0; i < coins.size(); ){
         if (coins[i]->checkCollision(yolk)){
             coins.erase(coins.begin() + i);
             Mix_PlayChannel(-1, music.eatCoin, 0);
-            yolk->numOfCoins++;
-            cout << yolk->numOfCoins << endl;
-        }
+            yolk->score++;
+        } else i++;
     }
-    //cout << timer.getTicks() << endl;
+
     if (timer.getTicks() > 0 && (timer.getTicks() > (level+1)*5000)){
         level++;
-        //cout << (100 + level*2) / 100.00f << endl;
         mul = (100 + level) / 100.00f;
     }
 }
@@ -316,8 +278,19 @@ void loop(const Music& music, MODE& mode)
 void update()
 {
     if (yolk->state == HIT_2){
-        Mix_PauseMusic();
         return;
+    }
+    bridge->move(bridge);
+    yolk->setDir(bridge[0].posY - BRIDGE_IDLE_HEIGHT);
+    yolk->move(bridge);
+    yolk->checkState();
+    if ( (enemy.size() > 0) && ((enemy[0]->posY > SCREEN_HEIGHT) )){
+        delete enemy[0];
+        enemy.erase(enemy.begin());
+    }
+    if ( (coins.size() > 0) && ((coins[0]->posY > SCREEN_HEIGHT) )){
+        delete coins[0];
+        coins.erase(coins.begin());
     }
     for (int i = 0; i < enemy.size(); i++){
         enemy[i]->move(mul);
@@ -325,8 +298,6 @@ void update()
     for (int i = 0; i < coins.size(); i++){
         coins[i]->move(mul);
     }
-    yolk->checkState();
-    //background->offset += BACKGROUND_VEL * mul;
     background->move(mul);
     backgroundLayer5->move(mul);
 }
@@ -335,21 +306,19 @@ void start(SDL_Renderer* renderer, const Music& music)
 {
     if (Mix_PlayingMusic() == 0 || Mix_PausedMusic()){
         Mix_PlayMusic(music.themeSongStart, -1);
-        cout << "start music" << endl;
     }
     background->render(renderer);
     backgroundLayer5->render(renderer);
     introBackground->renderIntro(renderer);
-    yolk->render(renderer);
+    backgroundLayer1->render(renderer);
 
+    yolk->render(renderer);
     for (int i = 0; i < NUM_OF_DOTS; i++){
         bridge[i].render(renderer);
     }
 
-    backgroundLayer1->render(renderer);
-
     if (text.loadText(renderer, to_string(highScore), 35, orange)){
-            text.render(renderer,64,16);
+            text.render(renderer,64,10);
     }
     if (text.loadText(renderer, "MAGIC", 63, blue)){
         text.render(renderer, 83, 90);
@@ -361,7 +330,6 @@ void start(SDL_Renderer* renderer, const Music& music)
     startButton->render(renderer);
     helpButton->render(renderer);
     quitButton->render(renderer);
-
 }
 
 void help(SDL_Renderer* renderer, const Music& music)
@@ -369,9 +337,7 @@ void help(SDL_Renderer* renderer, const Music& music)
     if (lastMode == START) start(renderer,music);
     else if (lastMode == PLAYING){
         playing(renderer);
-        if (Mix_PlayingMusic() == 1){
-            Mix_PauseMusic();
-        }
+        if (Mix_PlayingMusic() == 1) Mix_PauseMusic();
     }
     backgroundLayer3->render(renderer);
     continueButton->setPosition(120,600);
@@ -410,10 +376,9 @@ void playing(SDL_Renderer* renderer)
             }
             yolk->render(renderer);
     }
-
     backgroundLayer2->render(renderer);
-    if (text.loadText(renderer, to_string(yolk->numOfCoins), 35, orange)){
-            text.render(renderer,64,16);
+    if (text.loadText(renderer, to_string(yolk->score), 35, orange)){
+        text.render(renderer,64,10);
     }
     if (level < 10){
         if (text.loadText(renderer, "0", 48, orange)){
@@ -428,8 +393,6 @@ void playing(SDL_Renderer* renderer)
             text.render(renderer,177,16);
         }
     }
-
-
     pauseButton->render(renderer);
     helpButton->render(renderer);
     quitButton->render(renderer);
@@ -446,9 +409,10 @@ void pause(SDL_Renderer* renderer)
 
 void end(SDL_Renderer* renderer){
     // Check high score
-    if (yolk->numOfCoins > highScore){
+    if (yolk->score > highScore){
+        highScore = yolk->score;
         ofstream score("highScore.txt");
-        score << yolk->numOfCoins;
+        score << yolk->score;
         score.close();
     }
 
@@ -458,7 +422,7 @@ void end(SDL_Renderer* renderer){
     if (text.loadText(renderer, to_string(highScore), 50, white)){
         text.render(renderer,235,215);
     }
-    if (text.loadText(renderer, to_string(yolk->numOfCoins), 50, white)){
+    if (text.loadText(renderer, to_string(yolk->score), 50, white)){
         text.render(renderer,235,315);
     }
     continueButton->setPosition(120,413);
@@ -468,12 +432,10 @@ void end(SDL_Renderer* renderer){
 void freeGame()
 {
     for (int i = 0; i < enemy.size(); i++){
-        enemy[i]->free();
         enemy.erase(enemy.begin() + i);
         delete enemy[i];
     }
     for (int i = 0; i < coins.size(); i++){
-        coins[i]->free();
         coins.erase(coins.begin() + i);
         delete coins[i];
     }

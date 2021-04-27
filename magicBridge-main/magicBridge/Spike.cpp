@@ -15,13 +15,10 @@ void Spike::setPos()
 {
     //Set the side of the wall for Spike to move on
     dir = DIRECTION(rand() % 2);
-    //randDir = rand() % 2;
     if (dir == LEFT){
-        //dir = LEFT;
         posX = MIN_POS_X;
     }
     else {
-        //dir = RIGHT;
         posX = MAX_POS_X - SPIKE_WIDTH;
     }
 }
@@ -52,9 +49,3 @@ void Spike::render(SDL_Renderer* renderer, STATE state)
     if (state != HIT_2) frame++;
     if (frame/FRAME_VALUE >= TOTAL_SPIKE_SPRITE) frame = 0;
 }
-
-void Spike::free()
-{
-    Enemy::free();
-}
-

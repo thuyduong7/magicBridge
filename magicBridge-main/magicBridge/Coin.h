@@ -6,9 +6,6 @@
 
 #include <vector>
 
-//const int COIN_WIDTH = 33;
-//const int COIN_HEIGHT = 44;
-
 struct Coin : public Enemy
 {
     Coin();

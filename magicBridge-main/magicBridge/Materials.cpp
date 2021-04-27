@@ -26,8 +26,10 @@ SDL_Rect continueButtonSprite[TOTAL_BUTTON_SPRITE];
 SDL_Texture* quitButtonTexture;
 SDL_Rect quitButtonSprite[TOTAL_BUTTON_SPRITE];
 
+//Bridge
 SDL_Texture* dot;
 
+//Characters
 SDL_Texture* yolkTexture;
 SDL_Rect yolkIdle[TOTAL_YOLK_IDLE_SPRITE];
 SDL_Rect yolkRun1[TOTAL_YOLK_RUN_SPRITE];
@@ -257,7 +259,6 @@ bool Materials::load(SDL_Renderer* renderer)
         coinSprite[i].w = COIN_WIDTH;
         coinSprite[i].h = COIN_HEIGHT;
     }
-
     return true;
 }
 
@@ -266,7 +267,6 @@ SDL_Texture* Materials::loadFromFile(string path, SDL_Renderer* renderer)
     SDL_Texture* newTexture = NULL;
     SDL_Surface* loadSurface = IMG_Load(path.c_str());
     if (loadSurface != NULL){
-        //SDL_SetColorKey(loadSurface, SDL_TRUE, SDL_MapRGB(loadSurface->format, 0xff, 0xff, 0xff));
         newTexture = SDL_CreateTextureFromSurface(renderer, loadSurface);
         SDL_FreeSurface(loadSurface);
     }

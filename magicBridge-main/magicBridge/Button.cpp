@@ -69,4 +69,3 @@ void Button::render(SDL_Renderer* renderer)
 {
 	buttonMat.render(renderer, texture, buttonMat.getSprite(type, IDLE, currentSprite) , position);
 }
-

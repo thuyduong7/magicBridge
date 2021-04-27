@@ -16,11 +16,6 @@ void Ball::render(SDL_Renderer* renderer, STATE state)
     enemyMat.render(renderer, texture, srcRect, dstRect);
 }
 
-void Ball::free()
-{
-    Enemy::free();
-}
-
 SpikeBall::SpikeBall():Enemy(SPIKEBALL)
 {
     posX = MIN_POS_X;
@@ -43,32 +38,27 @@ SpikeBall::~SpikeBall()
     }
     delete []ball;
     for (int i = 0; i < fcoin.size(); i++){
-        delete fcoin[i];
         fcoin.erase(fcoin.begin() + i);
+        delete fcoin[i];
     }
 }
 
 void SpikeBall::setPos()
 {
     numOfRows = (rand() % MAX_ROWS) + 1;
-    //cout << numOfRows << endl;
     firstEmptyPos = rand() % (NUM_OF_COLS - NUM_OF_EMPTY_POS + 1);
     posY = -numOfRows*SPIKEBALL_HEIGHT;
     lastEmptyPos = firstEmptyPos + NUM_OF_EMPTY_POS - 1;
     int coinChance = rand()%2;
     if (coinChance == 1) setCoin = true;
-    //cout << numOfRows << ' ' << firstEmptyPos << ' ' << lastEmptyPos << endl;
     for (int i = 0; i < numOfRows; i++){
         for (int j = 0; j < NUM_OF_COLS; j++){
             ball[i][j].posY = (i * SPIKEBALL_HEIGHT) + posY;
             ball[i][j].posX = MIN_POS_X + j * SPIKEBALL_WIDTH;
 
             if ( (j < firstEmptyPos) || (j > lastEmptyPos) ) ball[i][j].setBall = true;
-            //else if (setCoin) ball[i][j]
         }
     }
-    //for (int i = 0; i < numOfRows; i++) cout << coin[i].posY << endl;
-    //cout << posY << endl;
     if (setCoin){
         for (int i = 0; i < numOfRows; i++){
             fcoin.push_back(new Coin);
@@ -77,7 +67,6 @@ void SpikeBall::setPos()
             fcoin[i]->posY = ball[i][0].posY + (SPIKEBALL_HEIGHT - COIN_HEIGHT)/2;
         }
     }
-    //for (int i = 0; i < numOfRows; i++) cout << coin[i].posY << endl;
     height = numOfRows * SPIKEBALL_HEIGHT;
 }
 
@@ -110,7 +99,7 @@ bool SpikeBall::checkCollision(Yolk* yolk)
                 Mix_PlayChannel(-1,_music.eatCoin,0);
                 delete fcoin[i];
                 fcoin.erase(fcoin.begin() + i);
-                yolk->numOfCoins++;
+                yolk->score++;
             }
         }
     }
@@ -139,32 +128,20 @@ bool SpikeBall::checkCollision(Yolk* yolk)
     topYolk = yolk->posY;
     bottomYolk = yolk->posY + yolk->height;
 
-    //if (leftEmptyPos < 0) leftEmptyPos = 0;
-
     if (bottomEmptyPos < topYolk) {
-            //cout << "B" << endl;
             return false;
     }
     if (topEmptyPos > bottomYolk) {
-            //cout << "C" << endl;
             return false;
     }
-
-    //cout << leftEmptyPos << ' ' << rightEmptyPos << ' ' << topEmptyPos << ' ' << bottomEmptyPos << endl;
-    //cout << leftYolk << ' ' << rightYolk << ' ' << topYolk << ' ' << bottomYolk << endl;
-    //cout << "////\n";
 
     // If Yolk is inside the blank space (collider), it will pass through the balls with no collisions
     if( rightYolk <= rightEmptyPos && leftYolk >= leftEmptyPos)
     {
-        //cout << "D" << endl;
         return false;
     }
-    //cout << "touch" << endl;
     return true;
 }
-
-
 
 void SpikeBall::render(SDL_Renderer* renderer, STATE state)
 {
@@ -179,17 +156,3 @@ void SpikeBall::render(SDL_Renderer* renderer, STATE state)
         }
     }
 }
-
-void SpikeBall::free()
-{
-    Enemy::free();
-    for (int i = 0; i < MAX_ROWS; i++){
-        for (int j = 0; j < NUM_OF_COLS; j++){
-            ball[i][j].free();
-        }
-    }
-    for (int i = 0; i < fcoin.size(); i++){
-        fcoin[i]->free();
-    }
-}
-

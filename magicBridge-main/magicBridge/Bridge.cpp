@@ -1,5 +1,4 @@
 #include "Bridge.h"
-
 #include "Core.h"
 
 Bridge::Bridge()
@@ -18,10 +17,8 @@ Bridge::~Bridge()
 
 }
 
-
 bool Bridge::move(Bridge* bridge)
 {
-    //dir = _dir;
     bool moved = false;
     if (bridge->dir == LEFT){
         moved = true;
@@ -34,7 +31,6 @@ bool Bridge::move(Bridge* bridge)
                 bridge[i].posY -= (i - NUM_OF_DOTS/2);
             }
         }
-        //bridge->dir = TOTAL_OF_DIRECTION;
     }
     if (bridge->dir == RIGHT){
         //move = true;
@@ -47,7 +43,6 @@ bool Bridge::move(Bridge* bridge)
                 bridge[i].posY += (i - NUM_OF_DOTS/2);
             }
         }
-        //bridge->dir = TOTAL_OF_DIRECTION;
     }
     return moved;
 }
@@ -57,5 +52,3 @@ void Bridge::render(SDL_Renderer* renderer)
     dstRect = {posX, posY, width, height};
     bridgeMat.render(renderer, texture, srcRect, dstRect);
 }
-
-

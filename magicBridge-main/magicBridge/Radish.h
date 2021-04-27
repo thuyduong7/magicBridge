@@ -11,9 +11,7 @@ struct Radish : public Enemy
     void setPos();
     void move(double mul);
     bool checkCollision(Yolk* yolk);
-    //void increaseVelY();
     void render(SDL_Renderer* renderer, STATE state);
-    void free();
 
     DIRECTION dir;
     int defaultPosX;

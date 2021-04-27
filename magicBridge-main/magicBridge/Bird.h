@@ -13,7 +13,6 @@ struct Bird : public Enemy
     bool checkCollision(Yolk* yolk);
     void increaseVelY();
     void render(SDL_Renderer* renderer, STATE state);
-    void free();
 
     DIRECTION dir;
     int minX, maxX;

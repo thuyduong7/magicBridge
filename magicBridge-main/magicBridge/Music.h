@@ -2,12 +2,10 @@
 #define MUSIC_H
 
 #include <SDL_mixer.h>
-#include "Yolk.h"
 
 struct Music
 {
     bool loadMusic();
-    bool getMusic(STATE state);
     void free();
 
     //The music that will be played

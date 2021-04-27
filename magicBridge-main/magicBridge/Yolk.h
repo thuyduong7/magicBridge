@@ -1,10 +1,7 @@
 #ifndef YOLK_H
 #define YOLK_H
 
-#include <SDL.h>
-//#include <queue>
 #include <cmath>
-
 
 #include "Bridge.h"
 
@@ -12,8 +9,6 @@ const int YOLK_WIDTH = 78;
 const int YOLK_HEIGHT = 71;
 const int YOLK_FRAME_VALUE = 4;
 const int STANDING_GAP = 3;
-
-//const int YOLK_VEL = 2;
 
 enum STATE
 {
@@ -32,9 +27,7 @@ struct Yolk
 {
         Yolk(int x, int y);
         ~Yolk();
-        //static SDL_Rect* setSprite(SDL_Rect* spriteSheet);
         void setDir(double _gap);
-        //void run(double _gap);
         void move(Bridge* bridge);
         void handleCollision();
         void checkState();
@@ -54,7 +47,7 @@ struct Yolk
         double gap;
         bool change_dir;
         bool hit;
-        int time, numOfCoins;
+        int time, score;
         //Use for blending when main character hit objects for the first time
         Uint8 a;
         bool decrease;
