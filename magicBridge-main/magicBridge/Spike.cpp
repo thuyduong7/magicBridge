@@ -23,7 +23,7 @@ void Spike::setPos()
     }
 }
 
-void Spike::move(double mul)
+void Spike::move(const double& mul)
 {
     posY += (velY * mul);
 }

@@ -7,14 +7,19 @@ Bridge::Bridge()
     height = DOT_HEIGHT;
     posX = 0;
     posY = 0;
-    texture = bridgeMat.getTexture(BRIDGE);
     dir = TOTAL_OF_DIRECTION;
     srcRect = {posX, posY, width, height};
+    texture = bridgeMat.getTexture(BRIDGE);
 }
 
 Bridge::~Bridge()
 {
 
+}
+
+void Bridge::getTexture(MAT_TYPE _type)
+{
+    texture = bridgeMat.getTexture(_type);
 }
 
 bool Bridge::move(Bridge* bridge)

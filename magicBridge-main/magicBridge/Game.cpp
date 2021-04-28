@@ -13,11 +13,15 @@ Background* backgroundLayer2;
 Background* backgroundLayer3;
 Background* backgroundLayer4;
 Background* backgroundLayer5;
+Background* backgroundLayer6;
 Background* introBackground;
 
 //Buttons
 Button* startButton;
 Button* helpButton;
+Button* settingsButton;
+Button* dayButton;
+Button* nightButton;
 Button* pauseButton;
 Button* continueButton;
 Button* quitButton;
@@ -28,13 +32,19 @@ Yolk* yolk;
 vector <Enemy*> enemy;
 vector <Coin*> coins;
 
+//Get the time to increase the speed of enemies
 Timer timer;
+//Use to render text
 Text text;
+
+//Set background
+bool day, night;
 
 //Multipliers of velocity
 double mul;
 int level, highScore;
 MODE lastMode;
+// The minimum distance between two enemies
 int min_distance;
 
 const int MIN_COIN_DISTANCE = SCREEN_HEIGHT/2;
@@ -54,6 +64,7 @@ bool initGame()
     backgroundLayer3 = new Background(BACKGROUNDLAYER3);
     backgroundLayer4 = new Background(BACKGROUNDLAYER4);
     backgroundLayer5 = new Background(BACKGROUNDLAYER5);
+    backgroundLayer6 = new Background(BACKGROUNDLAYER6);
     introBackground = new Background(INTRO);
 
     //Initialize buttons
@@ -62,6 +73,16 @@ bool initGame()
 
     helpButton = new Button(HELP_BUTTON);
     helpButton->setPosition(SCREEN_WIDTH - QUIT_BUTTON_WIDTH - HELP_BUTTON_WIDTH - 10, 10);
+
+    settingsButton = new Button(SETTINGS_BUTTON);
+    settingsButton->setPosition
+    (SCREEN_WIDTH - QUIT_BUTTON_WIDTH - HELP_BUTTON_WIDTH - PAUSE_BUTTON_WIDTH - 15, 10);
+
+    dayButton = new Button(TICK_BUTTON);
+    dayButton->setPosition(128,272);
+
+    nightButton = new Button(TICK_BUTTON);
+    nightButton->setPosition(128,396);
 
     pauseButton = new Button(PAUSE_BUTTON);
     pauseButton->setPosition
@@ -96,12 +117,16 @@ bool initGame()
     score >> highScore;
     score.close();
 
+    day = true;
+    night = false;
+
     return success;
 }
 
 void handleEventStart(const SDL_Event& e, const Music& music, MODE& mode, bool& quit)
 {
     startButton->handleEvent(e);
+    settingsButton->handleEvent(e);
     helpButton->handleEvent(e);
     quitButton->handleEvent(e);
     if (startButton->click){
@@ -112,30 +137,20 @@ void handleEventStart(const SDL_Event& e, const Music& music, MODE& mode, bool& 
         Mix_PausedMusic();
         Mix_PlayMusic( music.themeSong, -1 );
     }
+    if (settingsButton->click){
+        Mix_PlayChannel(-1, music.click, 0);
+        mode = SETTINGS;
+        lastMode = START;
+    }
     if (helpButton->click){
         Mix_PlayChannel(-1, music.click, 0);
         mode = HELP;
         lastMode = START;
-        timer.pause();
     }
     if (quitButton->click){
         Mix_PlayChannel(-1, music.click, 0);
         SDL_Delay(200);
         quit = true;
-    }
-}
-
-void handleEventHelp(const SDL_Event& e, const Music& music, MODE& mode)
-{
-    continueButton->handleEvent(e);
-    if (continueButton->click){
-        Mix_PlayChannel(-1, music.click, 0);
-        continueButton->currentSprite = BUTTON_SPRITE_MOUSE_OUT;
-        if (lastMode == START) mode = START;
-        else if (lastMode == PLAYING){
-            mode = PLAYING;
-            timer.unpause();
-        }
     }
 }
 
@@ -180,6 +195,46 @@ void handleEventPlaying(const SDL_Event& e, const Music& music, MODE& mode, bool
         else if (e.key.keysym.sym == SDLK_RIGHT){
             bridge->dir = TOTAL_OF_DIRECTION;
         }
+    }
+}
+
+void handleEventHelp(const SDL_Event& e, const Music& music, MODE& mode)
+{
+    continueButton->handleEvent(e);
+    if (continueButton->click){
+        Mix_PlayChannel(-1, music.click, 0);
+        continueButton->currentSprite = BUTTON_SPRITE_MOUSE_OUT;
+        if (lastMode == START) mode = START;
+        else if (lastMode == PLAYING){
+            mode = PLAYING;
+            timer.unpause();
+        }
+    }
+}
+
+void handleEventSettings(const SDL_Event& e, const Music& music, MODE& mode)
+{
+    continueButton->handleEvent(e);
+    dayButton->handleEvent(e);
+    nightButton->handleEvent(e);
+    if (continueButton->click){
+        Mix_PlayChannel(-1, music.click, 0);
+        continueButton->currentSprite = BUTTON_SPRITE_MOUSE_OUT;
+        if (lastMode == START) mode = START;
+        else if (lastMode == PLAYING){
+            mode = PLAYING;
+            timer.unpause();
+        }
+    }
+    if (dayButton->click){
+        Mix_PlayChannel(-1, music.click, 0);
+        day = true;
+        night = false;
+    }
+    if (nightButton->click){
+        Mix_PlayChannel(-1, music.click, 0);
+        day = false;
+        night = true;
     }
 }
 
@@ -332,20 +387,9 @@ void start(SDL_Renderer* renderer, const Music& music)
     }
 
     startButton->render(renderer);
+    settingsButton->render(renderer);
     helpButton->render(renderer);
     quitButton->render(renderer);
-}
-
-void help(SDL_Renderer* renderer, const Music& music)
-{
-    if (lastMode == START) start(renderer,music);
-    else if (lastMode == PLAYING){
-        playing(renderer);
-        if (Mix_PlayingMusic() == 1) Mix_PauseMusic();
-    }
-    backgroundLayer3->render(renderer);
-    continueButton->setPosition(120,600);
-    continueButton->render(renderer);
 }
 
 void playing(SDL_Renderer* renderer)
@@ -402,6 +446,50 @@ void playing(SDL_Renderer* renderer)
     quitButton->render(renderer);
 }
 
+void help(SDL_Renderer* renderer, const Music& music)
+{
+    if (lastMode == START) start(renderer,music);
+    else if (lastMode == PLAYING){
+        playing(renderer);
+        if (Mix_PlayingMusic() == 1) Mix_PauseMusic();
+    }
+    backgroundLayer3->render(renderer);
+    continueButton->setPosition(120,600);
+    continueButton->render(renderer);
+}
+
+void settings(SDL_Renderer* renderer, const Music& music)
+{
+    start(renderer, music);
+    backgroundLayer6->render(renderer);
+    if (day && !night){
+        background->getTexture(BACKGROUND);
+        backgroundLayer1->getTexture(BACKGROUNDLAYER1);
+        backgroundLayer2->getTexture(BACKGROUNDLAYER2);
+        backgroundLayer5->getTexture(BACKGROUNDLAYER5);
+        for (int i = 0; i < NUM_OF_DOTS; i++){
+            bridge[i].getTexture(BRIDGE);
+        }
+        dayButton->currentSprite = BUTTON_SPRITE_MOUSE_OVER_MOTION;
+        nightButton->currentSprite = BUTTON_SPRITE_MOUSE_OUT;
+    }
+    if (!day && night){
+        background->getTexture(BACKGROUND2);
+        backgroundLayer1->getTexture(BACKGROUNDLAYER1_2);
+        backgroundLayer2->getTexture(BACKGROUNDLAYER2_2);
+        backgroundLayer5->getTexture(BACKGROUNDLAYER5_2);
+        for (int i = 0; i < NUM_OF_DOTS; i++){
+            bridge[i].getTexture(BRIDGE2);
+        }
+        dayButton->currentSprite = BUTTON_SPRITE_MOUSE_OUT;
+        nightButton->currentSprite = BUTTON_SPRITE_MOUSE_OVER_MOTION;
+    }
+    dayButton->render(renderer);
+    nightButton->render(renderer);
+    continueButton->setPosition(120,518);
+    continueButton->render(renderer);
+}
+
 void pause(SDL_Renderer* renderer)
 {
     playing(renderer);
@@ -449,10 +537,14 @@ void freeGame()
     delete backgroundLayer3;
     delete backgroundLayer4;
     delete backgroundLayer5;
+    delete backgroundLayer6;
     delete introBackground;
 
     delete startButton;
     delete helpButton;
+    delete settingsButton;
+    delete dayButton;
+    delete nightButton;
     delete pauseButton;
     delete continueButton;
     delete quitButton;

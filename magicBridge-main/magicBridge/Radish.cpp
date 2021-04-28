@@ -6,7 +6,6 @@ int MAX_MOVE = 60;
 Radish::Radish() : Enemy(RADISH)
 {
     posY = -RADISH_HEIGHT;
-    defaultPosX = posX;
     dir = RIGHT;
     time = 0;
 }
@@ -19,10 +18,9 @@ void Radish::setPos()
 {
     // "-int(RADISH_VEL_X * MAX_MOVE)" "+(RADISH_VEL_X * MAX_MOVE)" let enough space for radish to move in zigzag
     posX = rand()%(PLAYING_SCREEN_WIDTH - RADISH_WIDTH - int(RADISH_VEL_X * MAX_MOVE)) + (MIN_POS_X + RADISH_VEL_X * MAX_MOVE);
-    defaultPosX = posX;
 }
 
-void Radish::move(double mul)
+void Radish::move(const double& mul)
 {
     posY += (velY * mul);
     if (dir == RIGHT){

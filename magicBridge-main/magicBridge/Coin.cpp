@@ -36,7 +36,7 @@ void Coin::setPos(vector<Enemy*> &enemy)
     } while (touch);
 }
 
-void Coin::move(double mul)
+void Coin::move(const double& mul)
 {
     posY += (velY * mul);
 }

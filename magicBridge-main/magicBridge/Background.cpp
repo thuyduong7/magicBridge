@@ -20,6 +20,10 @@ Background::~Background()
 
 }
 
+void Background::getTexture(MAT_TYPE _type){
+    texture = backgroundMat.getTexture(_type);
+}
+
 void Background::move(const double mul)
 {
     offset += (vel * mul);

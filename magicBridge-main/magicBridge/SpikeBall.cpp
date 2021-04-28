@@ -70,7 +70,7 @@ void SpikeBall::setPos()
     height = numOfRows * SPIKEBALL_HEIGHT;
 }
 
-void SpikeBall::move(double mul)
+void SpikeBall::move(const double& mul)
 {
     posY += (velY * mul);
     for (int i = 0; i < numOfRows; i++){

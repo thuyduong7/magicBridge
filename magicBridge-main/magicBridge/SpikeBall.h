@@ -29,7 +29,7 @@ struct SpikeBall : public Enemy
     SpikeBall();
     ~SpikeBall();
     void setPos();
-    void move(double mul);
+    void move(const double& mul);
     bool checkCollision(Yolk* yolk);
     void increaseVelY();
     void render(SDL_Renderer* renderer, STATE state);

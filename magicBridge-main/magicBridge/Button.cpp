@@ -18,6 +18,16 @@ Button::Button(MAT_TYPE _type)
             position.h = HELP_BUTTON_HEIGHT;
             break;
 
+        case SETTINGS_BUTTON:
+            position.w = SETTINGS_BUTTON_WIDTH;
+            position.h = SETTINGS_BUTTON_HEIGHT;
+            break;
+
+        case TICK_BUTTON:
+            position.w = TICK_BUTTON_WIDTH;
+            position.h = TICK_BUTTON_HEIGHT;
+            break;
+
         case PAUSE_BUTTON:
             position.w = PAUSE_BUTTON_WIDTH;
             position.h = PAUSE_BUTTON_HEIGHT;

@@ -9,7 +9,7 @@ struct Spike : public Enemy
     Spike();
     ~Spike();
     void setPos();
-    void move(double mul);
+    void move(const double& mul);
     bool checkCollision(Yolk* yolk);
     void render(SDL_Renderer* renderer, STATE state);
 

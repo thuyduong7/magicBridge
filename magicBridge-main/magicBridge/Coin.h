@@ -11,7 +11,7 @@ struct Coin : public Enemy
     Coin();
     ~Coin();
     void setPos(vector<Enemy*> &enemy);
-    void move(double mul);
+    void move(const double& mul);
     bool checkCollision(Yolk* yolk);
     bool checkCollisionEnemy(Enemy* enemy);
     //void increaseVelY();

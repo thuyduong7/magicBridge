@@ -6,11 +6,16 @@
 
 //Background
 SDL_Texture* backgroundTexture;
+SDL_Texture* background2Texture;
 SDL_Texture* backgroundLayer1Texture;
+SDL_Texture* backgroundLayer1_2Texture;
 SDL_Texture* backgroundLayer2Texture;
+SDL_Texture* backgroundLayer2_2Texture;
 SDL_Texture* backgroundLayer3Texture;
 SDL_Texture* backgroundLayer4Texture;
 SDL_Texture* backgroundLayer5Texture;
+SDL_Texture* backgroundLayer5_2Texture;
+SDL_Texture* backgroundLayer6Texture;
 SDL_Texture* introTexture;
 SDL_Rect introSprite[TOTAL_INTRO_SPRITE];
 
@@ -19,6 +24,10 @@ SDL_Texture* startButtonTexture;
 SDL_Rect startButtonSprite[TOTAL_BUTTON_SPRITE];
 SDL_Texture* helpButtonTexture;
 SDL_Rect helpButtonSprite[TOTAL_BUTTON_SPRITE];
+SDL_Texture* settingsButtonTexture;
+SDL_Rect settingsButtonSprite[TOTAL_BUTTON_SPRITE];
+SDL_Texture* tickButtonTexture;
+SDL_Rect tickButtonSprite[TOTAL_BUTTON_SPRITE];
 SDL_Texture* pauseButtonTexture;
 SDL_Rect pauseButtonSprite[TOTAL_BUTTON_SPRITE];
 SDL_Texture* continueButtonTexture;
@@ -28,6 +37,7 @@ SDL_Rect quitButtonSprite[TOTAL_BUTTON_SPRITE];
 
 //Bridge
 SDL_Texture* dot;
+SDL_Texture* dot2;
 
 //Characters
 SDL_Texture* yolkTexture;
@@ -59,15 +69,33 @@ bool Materials::load(SDL_Renderer* renderer)
         return false;
     }
 
+    background2Texture = loadFromFile("Assets/Background/Background2.png", renderer);
+    if (backgroundTexture == NULL){
+        cout << "Fail to load background 2\n";
+        return false;
+    }
+
     backgroundLayer1Texture = loadFromFile("Assets/Background/BackgroundLayer1.png", renderer);
     if (backgroundLayer1Texture == NULL){
         cout << "Fail to load background layer 1\n";
         return false;
     }
 
+    backgroundLayer1_2Texture = loadFromFile("Assets/Background/BackgroundLayer1_2.png", renderer);
+    if (backgroundLayer1_2Texture == NULL){
+        cout << "Fail to load background layer 1_2\n";
+        return false;
+    }
+
     backgroundLayer2Texture = loadFromFile("Assets/Background/BackgroundLayer2.png", renderer);
     if (backgroundLayer2Texture == NULL){
         cout << "Fail to load background layer 2\n";
+        return false;
+    }
+
+    backgroundLayer2_2Texture = loadFromFile("Assets/Background/BackgroundLayer2_2.png", renderer);
+    if (backgroundLayer2_2Texture == NULL){
+        cout << "Fail to load background layer 2_2\n";
         return false;
     }
 
@@ -86,6 +114,18 @@ bool Materials::load(SDL_Renderer* renderer)
     backgroundLayer5Texture = loadFromFile("Assets/Background/BackgroundLayer5.png", renderer);
     if (backgroundLayer5Texture == NULL){
         cout << "Fail to load background layer 5\n";
+        return false;
+    }
+
+    backgroundLayer5_2Texture = loadFromFile("Assets/Background/BackgroundLayer5_2.png", renderer);
+    if (backgroundLayer5_2Texture == NULL){
+        cout << "Fail to load background layer 5_2\n";
+        return false;
+    }
+
+    backgroundLayer6Texture = loadFromFile("Assets/Background/BackgroundLayer6.png", renderer);
+    if (backgroundLayer6Texture == NULL){
+        cout << "Fail to load background layer 6\n";
         return false;
     }
 
@@ -124,6 +164,30 @@ bool Materials::load(SDL_Renderer* renderer)
         helpButtonSprite[i].y = 0;
         helpButtonSprite[i].w = HELP_BUTTON_WIDTH;
         helpButtonSprite[i].h = HELP_BUTTON_HEIGHT;
+    }
+
+    settingsButtonTexture = loadFromFile("Assets/Buttons/Settings.png", renderer);
+    if (settingsButtonTexture == NULL){
+        cout << "Fail to load settings button\n";
+        return false;
+    }
+    for (int i = 0; i < TOTAL_BUTTON_SPRITE; i++){
+        settingsButtonSprite[i].x = SETTINGS_BUTTON_WIDTH * i;
+        settingsButtonSprite[i].y = 0;
+        settingsButtonSprite[i].w = SETTINGS_BUTTON_WIDTH;
+        settingsButtonSprite[i].h = SETTINGS_BUTTON_HEIGHT;
+    }
+
+    tickButtonTexture = loadFromFile("Assets/Buttons/Tick.png", renderer);
+    if (tickButtonTexture == NULL){
+        cout << "Fail to load tick button\n";
+        return false;
+    }
+    for (int i = 0; i < TOTAL_BUTTON_SPRITE; i++){
+        tickButtonSprite[i].x = TICK_BUTTON_WIDTH * i;
+        tickButtonSprite[i].y = 0;
+        tickButtonSprite[i].w = TICK_BUTTON_WIDTH;
+        tickButtonSprite[i].h = TICK_BUTTON_HEIGHT;
     }
 
     pauseButtonTexture = loadFromFile("Assets/Buttons/Pause.png", renderer);
@@ -168,6 +232,13 @@ bool Materials::load(SDL_Renderer* renderer)
         cout << "Fail to load dot\n";
         return false;
     }
+
+    dot2 = loadFromFile("Assets/Dot2.png", renderer);
+    if (dot2 == NULL){
+        cout << "Fail to load dot 2\n";
+        return false;
+    }
+
     //Load yolk texture
     yolkTexture = loadFromFile("Assets/Cat.png", renderer);
     if (yolkTexture == NULL){
@@ -278,16 +349,26 @@ SDL_Texture* Materials::getTexture(MAT_TYPE type)
     switch (type){
         case BACKGROUND:
             return backgroundTexture;
+        case BACKGROUND2:
+            return background2Texture;
         case BACKGROUNDLAYER1:
             return backgroundLayer1Texture;
+        case BACKGROUNDLAYER1_2:
+            return backgroundLayer1_2Texture;
         case BACKGROUNDLAYER2:
             return backgroundLayer2Texture;
+        case BACKGROUNDLAYER2_2:
+            return backgroundLayer2_2Texture;
         case BACKGROUNDLAYER3:
             return backgroundLayer3Texture;
         case BACKGROUNDLAYER4:
             return backgroundLayer4Texture;
         case BACKGROUNDLAYER5:
             return backgroundLayer5Texture;
+        case BACKGROUNDLAYER5_2:
+            return backgroundLayer5_2Texture;
+        case BACKGROUNDLAYER6:
+            return backgroundLayer6Texture;
         case INTRO:
             return introTexture;
 
@@ -295,6 +376,10 @@ SDL_Texture* Materials::getTexture(MAT_TYPE type)
             return startButtonTexture;
         case HELP_BUTTON:
             return helpButtonTexture;
+        case SETTINGS_BUTTON:
+            return settingsButtonTexture;
+        case TICK_BUTTON:
+            return tickButtonTexture;
         case PAUSE_BUTTON:
             return pauseButtonTexture;
         case CONTINUE_BUTTON:
@@ -304,6 +389,8 @@ SDL_Texture* Materials::getTexture(MAT_TYPE type)
 
         case BRIDGE:
             return dot;
+        case BRIDGE2:
+            return dot2;
         case YOLK:
             return yolkTexture;
 
@@ -332,6 +419,10 @@ SDL_Rect Materials::getSprite(MAT_TYPE type, SPRITE_TYPE _type, int i)
             return startButtonSprite[i];
         case HELP_BUTTON:
             return helpButtonSprite[i];
+        case SETTINGS_BUTTON:
+            return settingsButtonSprite[i];
+        case TICK_BUTTON:
+            return tickButtonSprite[i];
         case PAUSE_BUTTON:
             return pauseButtonSprite[i];
         case CONTINUE_BUTTON:
@@ -377,20 +468,28 @@ void Materials::render(SDL_Renderer* renderer, SDL_Texture* _texture, SDL_Rect s
 void Materials::free()
 {
     SDL_DestroyTexture(backgroundTexture);
+    SDL_DestroyTexture(background2Texture);
     SDL_DestroyTexture(backgroundLayer1Texture);
+    SDL_DestroyTexture(backgroundLayer1_2Texture);
     SDL_DestroyTexture(backgroundLayer2Texture);
+    SDL_DestroyTexture(backgroundLayer2_2Texture);
     SDL_DestroyTexture(backgroundLayer3Texture);
     SDL_DestroyTexture(backgroundLayer4Texture);
     SDL_DestroyTexture(backgroundLayer5Texture);
+    SDL_DestroyTexture(backgroundLayer5_2Texture);
+    SDL_DestroyTexture(backgroundLayer6Texture);
     SDL_DestroyTexture(introTexture);
 
     SDL_DestroyTexture(startButtonTexture);
     SDL_DestroyTexture(helpButtonTexture);
+    SDL_DestroyTexture(settingsButtonTexture);
+    SDL_DestroyTexture(tickButtonTexture);
     SDL_DestroyTexture(pauseButtonTexture);
     SDL_DestroyTexture(continueButtonTexture);
     SDL_DestroyTexture(quitButtonTexture);
 
     SDL_DestroyTexture(dot);
+    SDL_DestroyTexture(dot2);
     SDL_DestroyTexture(yolkTexture);
 
     SDL_DestroyTexture(radish);

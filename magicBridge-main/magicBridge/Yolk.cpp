@@ -2,27 +2,27 @@
 #include "Core.h"
 #include "Materials.h"
 
-Yolk::Yolk(int x, int y)
+Yolk::Yolk(const int& x, const int& y)
 {
+    state = PLAY;
     width = YOLK_WIDTH;
     height = YOLK_HEIGHT;
     posX = x;
     posY = y;
+    srcRect = {posX, posY, width, height};
+    texture = yolkMat.getTexture(YOLK);
     velX = 0;
     lastVelX = 0;
-    texture = yolkMat.getTexture(YOLK);
     dir = TOTAL_OF_DIRECTION;
     last_dir = TOTAL_OF_DIRECTION;
-    srcRect = {posX, posY, width, height};
     frame = 0;
     change_dir = false;
     time = 0;
-    score = 0;
+    hit = false;
     a = 255;
     decrease = true;
     change = 0;
-    state = PLAY;
-    hit = false;
+    score = 0;
 }
 
 Yolk::~Yolk()
@@ -89,17 +89,17 @@ void Yolk::move(Bridge* bridge)
     // Set posY according to posX
     posY = bridge[int(posX/DOT_WIDTH)].posY - YOLK_HEIGHT + STANDING_GAP;
     if (posX == MIN_POS_X) posY = bridge[0].posY - YOLK_HEIGHT + STANDING_GAP;
-    //cout << dir << ' ' << posX << ' ' << posY << endl;
-
 }
 
 void Yolk::handleCollision()
 {
+    //Hit enemies for the first time
     if (state == PLAY){
         state = PAUSE_1;
         pauseTime = SDL_GetTicks();
         hit = true;
     }
+    //Hit enemies for the second time -> die
     else if (state == HIT_1 || state == PAUSE_2){
         state = HIT_2;
         time = 0;
@@ -116,7 +116,6 @@ void Yolk::checkState()
             if ((SDL_GetTicks()-pauseTime) >= 3000){
                 state = HIT_1;
                 hitTime = SDL_GetTicks();
-                //cout << "HIT_1" << endl;
             }
             break;
 
@@ -125,7 +124,6 @@ void Yolk::checkState()
             if ((SDL_GetTicks()-pauseTime) >= 1000){
                 state = PLAY;
                 hitTime = SDL_GetTicks();
-                //cout << "PLAY" << endl;
             }
             break;
 
@@ -133,7 +131,6 @@ void Yolk::checkState()
             if ((SDL_GetTicks()-hitTime) >= 9000){
                 state = PAUSE_2;
                 pauseTime = SDL_GetTicks();
-                //cout << "PAUSE_2" << endl;
             }
     }
 }
@@ -141,19 +138,16 @@ void Yolk::checkState()
 void Yolk::blend(Uint32 pauseTime)
 {
     if (decrease){
-            //cout << SDL_GetTicks() - pauseTime << endl;
-            a -= 15;
-            change++;
+        a -= 15;
+        change++;
 
         if (change == 5){
             decrease = false;
             change = 0;
         }
-    }
-    else if (!decrease){
-            //cout << SDL_GetTicks() - pauseTime << endl;
-            a += 15;
-            change++;
+    } else {
+        a += 15;
+        change++;
 
         if (change == 5){
             decrease = true;
@@ -172,8 +166,6 @@ void Yolk::render(SDL_Renderer* renderer)
         {
             if (dir == TOTAL_OF_DIRECTION)
                 srcRect = yolkMat.getSprite(YOLK, IDLE);
-            //When the bridge is inclined and Yolk is not at the edge of the screen
-            //if (posX != MIN_POS_X && posX != (MAX_POS_X - YOLK_WIDTH) && bridge[0].posY != BRIDGE_IDLE_HEIGHT)
             else
                 srcRect = yolkMat.getSprite(YOLK, RUN, frame/YOLK_FRAME_VALUE);
             break;
@@ -181,7 +173,7 @@ void Yolk::render(SDL_Renderer* renderer)
         case PAUSE_1: case HIT_1: case PAUSE_2:
         {
             if (dir == TOTAL_OF_DIRECTION)
-                srcRect = yolkMat.getSprite(YOLK, IDLE,1);
+                srcRect = yolkMat.getSprite(YOLK, IDLE, 1);
             else
                 srcRect = yolkMat.getSprite(YOLK, HIT, frame/YOLK_FRAME_VALUE);
             break;
@@ -189,7 +181,7 @@ void Yolk::render(SDL_Renderer* renderer)
         case HIT_2:
         {
             srcRect = yolkMat.getSprite(YOLK,DIE,0);
-            if (time < 7){
+            if (time < 10){
                 posY -=3;
                 time++;
             }

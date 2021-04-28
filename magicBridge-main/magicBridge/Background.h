@@ -12,6 +12,7 @@ struct Background
     Background(MAT_TYPE _type);
     ~Background();
 
+    void getTexture(MAT_TYPE _type);
     void move(const double mul);
     void render(SDL_Renderer* renderer);
     void renderOffset(SDL_Renderer* renderer);
@@ -26,6 +27,4 @@ struct Background
     int frame;
 };
 
-
 #endif // BACKGROUND_H
-

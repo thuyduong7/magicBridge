@@ -25,7 +25,7 @@ enum STATE
 
 struct Yolk
 {
-        Yolk(int x, int y);
+        Yolk(const int& x, const int& y);
         ~Yolk();
         void setDir(double _gap);
         void move(Bridge* bridge);
@@ -34,23 +34,32 @@ struct Yolk
         void blend(Uint32 pauseTime);
         void render(SDL_Renderer* renderer);
 
+        STATE state;
         int width, height;
         double posX, posY;
-        double velX, lastVelX;
-        //std::queue <DIRECTION> dir;
-        DIRECTION dir, last_dir;
-        STATE state;
         SDL_Texture* texture;
-        Materials yolkMat;
         SDL_Rect srcRect, dstRect;
+        double velX, lastVelX;
+        DIRECTION dir, last_dir;
+        Materials yolkMat;
         int frame;
+        // Velocity of main character depends on the gap between the current highest point of the bridge and its idle height
         double gap;
+        // Check if main character is changing direction or not
+        // If it is, it will continue on the last direction for a short time
+        //according to its last velocity (lastVelX) before changing direction
         bool change_dir;
+        //The number of times to move on the last direction before changing direction
+        //and it is also used to make the main character go up for a short time before ending game
+        int time;
+        //Check if main character hit enemies or not
         bool hit;
-        int time, score;
-        //Use for blending when main character hit objects for the first time
+        int score;
+        //Use for blending when main character hit enemies
         Uint8 a;
+        //Check when to decrease or increase the alpha to make flicker effects for main character
         bool decrease;
+        //The amount of time to continuously decrease or increase the alpha
         int change;
         Uint32 pauseTime, hitTime;
 };

@@ -22,16 +22,16 @@ struct Bridge
     Bridge();
     ~Bridge();
 
+    void getTexture(MAT_TYPE _type);
     bool move(Bridge* bridge);
-    void update();
     void render(SDL_Renderer* renderer);
 
     int width, height;
     int posX, posY;
     DIRECTION dir;
+    SDL_Rect srcRect, dstRect;
     SDL_Texture* texture;
     Materials bridgeMat;
-    SDL_Rect srcRect, dstRect;
 };
 
 #endif // BRIDGE_H

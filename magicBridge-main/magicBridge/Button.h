@@ -9,6 +9,12 @@ const int START_BUTTON_HEIGHT = 135;
 const int HELP_BUTTON_WIDTH = 34;
 const int HELP_BUTTON_HEIGHT = 32;
 
+const int SETTINGS_BUTTON_WIDTH = 32;
+const int SETTINGS_BUTTON_HEIGHT = 32;
+
+const int TICK_BUTTON_WIDTH = 60;
+const int TICK_BUTTON_HEIGHT = 60;
+
 const int PAUSE_BUTTON_WIDTH = 35;
 const int PAUSE_BUTTON_HEIGHT = 32;
 

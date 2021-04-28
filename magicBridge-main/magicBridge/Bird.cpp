@@ -21,7 +21,7 @@ void Bird::setPos()
     posX = (rand()%distance) + minX;
 }
 
-void Bird::move(double mul)
+void Bird::move(const double& mul)
 {
 
     posY += (velY * mul);

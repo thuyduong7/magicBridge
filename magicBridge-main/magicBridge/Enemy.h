@@ -31,7 +31,7 @@ struct Enemy
     Enemy(MAT_TYPE _type);
     ~Enemy(){};
     virtual void setPos(){};
-    virtual void move(double mul){};
+    virtual void move(const double& mul){};
     virtual bool checkCollision(Yolk* yolk);
     virtual void render(SDL_Renderer* renderer, STATE state){};
 
