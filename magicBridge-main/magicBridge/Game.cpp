@@ -22,7 +22,6 @@ Button* helpButton;
 Button* settingsButton;
 Button* dayButton;
 Button* nightButton;
-Button* pauseButton;
 Button* continueButton;
 Button* quitButton;
 
@@ -83,10 +82,6 @@ bool initGame()
 
     nightButton = new Button(TICK_BUTTON);
     nightButton->setPosition(128,396);
-
-    pauseButton = new Button(PAUSE_BUTTON);
-    pauseButton->setPosition
-    (SCREEN_WIDTH - QUIT_BUTTON_WIDTH - HELP_BUTTON_WIDTH - PAUSE_BUTTON_WIDTH - 15, 10);
 
     continueButton = new Button(CONTINUE_BUTTON);
 
@@ -160,12 +155,13 @@ void handleEventPlaying(const SDL_Event& e, const Music& music, MODE& mode, bool
         return;
     }
     //Handle mouse events
-    pauseButton->handleEvent(e);
+    settingsButton->handleEvent(e);
     helpButton->handleEvent(e);
     quitButton->handleEvent(e);
-    if (pauseButton->click){
+    if (settingsButton->click){
         Mix_PlayChannel(-1, music.click, 0);
-        mode = PAUSE;
+        lastMode = PLAYING;
+        mode = SETTINGS;
         timer.pause();
     }
     if (helpButton->click){
@@ -235,16 +231,6 @@ void handleEventSettings(const SDL_Event& e, const Music& music, MODE& mode)
         Mix_PlayChannel(-1, music.click, 0);
         day = false;
         night = true;
-    }
-}
-
-void handleEventPause(const SDL_Event& e, const Music& music, MODE& mode)
-{
-    pauseButton->handleEvent(e);
-    if (pauseButton->click){
-        Mix_PlayChannel(-1, music.click, 0);
-        mode = PLAYING;
-        timer.unpause();
     }
 }
 
@@ -441,7 +427,7 @@ void playing(SDL_Renderer* renderer)
             text.render(renderer,177,16);
         }
     }
-    pauseButton->render(renderer);
+    settingsButton->render(renderer);
     helpButton->render(renderer);
     quitButton->render(renderer);
 }
@@ -460,7 +446,14 @@ void help(SDL_Renderer* renderer, const Music& music)
 
 void settings(SDL_Renderer* renderer, const Music& music)
 {
-    start(renderer, music);
+    if (lastMode == START) start(renderer, music);
+    else{
+        playing(renderer);
+        if (yolk->dir != TOTAL_OF_DIRECTION) yolk->frame--;
+        if (Mix_PlayingMusic() == 1){
+            Mix_PauseMusic();
+        }
+    }
     backgroundLayer6->render(renderer);
     if (day && !night){
         background->getTexture(BACKGROUND);
@@ -493,10 +486,7 @@ void settings(SDL_Renderer* renderer, const Music& music)
 void pause(SDL_Renderer* renderer)
 {
     playing(renderer);
-    if (yolk->dir != TOTAL_OF_DIRECTION) yolk->frame--;
-    if (Mix_PlayingMusic() == 1){
-        Mix_PauseMusic();
-    }
+
 }
 
 void end(SDL_Renderer* renderer){
@@ -545,7 +535,6 @@ void freeGame()
     delete settingsButton;
     delete dayButton;
     delete nightButton;
-    delete pauseButton;
     delete continueButton;
     delete quitButton;
 

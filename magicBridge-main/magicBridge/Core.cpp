@@ -93,10 +93,6 @@ void Core::handleEvent(bool& quit)
                     handleEventSettings(e,music,mode);
                     break;
 
-                case PAUSE:
-                    handleEventPause(e,music,mode);
-                    break;
-
                 case END:
                     handleEventEnd(e,music,mode);
                     break;
@@ -128,10 +124,6 @@ void Core::render(bool& quit)
 
             case SETTINGS:
                 settings(renderer, music);
-                break;
-
-            case PAUSE:
-                pause(renderer);
                 break;
 
             case END:

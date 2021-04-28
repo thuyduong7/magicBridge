@@ -32,7 +32,6 @@ enum MODE
     PLAYING,
     HELP,
     SETTINGS,
-    PAUSE,
     END
 };
 
