@@ -23,6 +23,7 @@ Button* settingsButton;
 Button* dayButton;
 Button* nightButton;
 Button* continueButton;
+Button* continueButton2;
 Button* quitButton;
 
 // Objects
@@ -84,6 +85,7 @@ bool initGame()
     nightButton->setPosition(128,396);
 
     continueButton = new Button(CONTINUE_BUTTON);
+    continueButton2 = new Button(CONTINUE_BUTTON);
 
     quitButton = new Button(QUIT_BUTTON);
     quitButton->setPosition(SCREEN_WIDTH - QUIT_BUTTON_WIDTH - 5, 10);
@@ -236,8 +238,8 @@ void handleEventSettings(const SDL_Event& e, const Music& music, MODE& mode)
 
 void handleEventEnd(const SDL_Event& e, const Music& music, MODE& mode)
 {
-    continueButton->handleEvent(e);
-    if (continueButton->click){
+    continueButton2->handleEvent(e);
+    if (continueButton2->click){
         Mix_PlayChannel(-1, music.showScore, 0);
         SDL_Delay(400);
         mode = START;
@@ -507,8 +509,8 @@ void end(SDL_Renderer* renderer){
     if (text.loadText(renderer, to_string(yolk->score), 50, white)){
         text.render(renderer,235,315);
     }
-    continueButton->setPosition(120,413);
-    continueButton->render(renderer);
+    continueButton2->setPosition(120,413);
+    continueButton2->render(renderer);
 }
 
 void freeGame()
@@ -536,6 +538,7 @@ void freeGame()
     delete dayButton;
     delete nightButton;
     delete continueButton;
+    delete continueButton2;
     delete quitButton;
 
     delete []bridge;
