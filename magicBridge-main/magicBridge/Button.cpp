@@ -28,11 +28,6 @@ Button::Button(MAT_TYPE _type)
             position.h = TICK_BUTTON_HEIGHT;
             break;
 
-        case PAUSE_BUTTON:
-            position.w = PAUSE_BUTTON_WIDTH;
-            position.h = PAUSE_BUTTON_HEIGHT;
-            break;
-
         case CONTINUE_BUTTON:
             position.w = CONTINUE_BUTTON_WIDTH;
             position.h = CONTINUE_BUTTON_HEIGHT;

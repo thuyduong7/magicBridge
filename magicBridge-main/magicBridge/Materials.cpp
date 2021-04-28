@@ -28,8 +28,6 @@ SDL_Texture* settingsButtonTexture;
 SDL_Rect settingsButtonSprite[TOTAL_BUTTON_SPRITE];
 SDL_Texture* tickButtonTexture;
 SDL_Rect tickButtonSprite[TOTAL_BUTTON_SPRITE];
-SDL_Texture* pauseButtonTexture;
-SDL_Rect pauseButtonSprite[TOTAL_BUTTON_SPRITE];
 SDL_Texture* continueButtonTexture;
 SDL_Rect continueButtonSprite[TOTAL_BUTTON_SPRITE];
 SDL_Texture* quitButtonTexture;
@@ -188,18 +186,6 @@ bool Materials::load(SDL_Renderer* renderer)
         tickButtonSprite[i].y = 0;
         tickButtonSprite[i].w = TICK_BUTTON_WIDTH;
         tickButtonSprite[i].h = TICK_BUTTON_HEIGHT;
-    }
-
-    pauseButtonTexture = loadFromFile("Assets/Buttons/Pause.png", renderer);
-    if (pauseButtonTexture == NULL){
-        cout << "Fail to load pause button\n";
-        return false;
-    }
-    for (int i = 0; i < TOTAL_BUTTON_SPRITE; i++){
-        pauseButtonSprite[i].x = PAUSE_BUTTON_WIDTH * i;
-        pauseButtonSprite[i].y = 0;
-        pauseButtonSprite[i].w = PAUSE_BUTTON_WIDTH;
-        pauseButtonSprite[i].h = PAUSE_BUTTON_HEIGHT;
     }
 
     continueButtonTexture = loadFromFile("Assets/Buttons/Continue.png", renderer);
@@ -380,8 +366,6 @@ SDL_Texture* Materials::getTexture(MAT_TYPE type)
             return settingsButtonTexture;
         case TICK_BUTTON:
             return tickButtonTexture;
-        case PAUSE_BUTTON:
-            return pauseButtonTexture;
         case CONTINUE_BUTTON:
             return continueButtonTexture;
         case QUIT_BUTTON:
@@ -423,8 +407,6 @@ SDL_Rect Materials::getSprite(MAT_TYPE type, SPRITE_TYPE _type, int i)
             return settingsButtonSprite[i];
         case TICK_BUTTON:
             return tickButtonSprite[i];
-        case PAUSE_BUTTON:
-            return pauseButtonSprite[i];
         case CONTINUE_BUTTON:
             return continueButtonSprite[i];
         case QUIT_BUTTON:
@@ -484,7 +466,6 @@ void Materials::free()
     SDL_DestroyTexture(helpButtonTexture);
     SDL_DestroyTexture(settingsButtonTexture);
     SDL_DestroyTexture(tickButtonTexture);
-    SDL_DestroyTexture(pauseButtonTexture);
     SDL_DestroyTexture(continueButtonTexture);
     SDL_DestroyTexture(quitButtonTexture);
 

@@ -75,7 +75,7 @@ bool initGame()
 
     settingsButton = new Button(SETTINGS_BUTTON);
     settingsButton->setPosition
-    (SCREEN_WIDTH - QUIT_BUTTON_WIDTH - HELP_BUTTON_WIDTH - PAUSE_BUTTON_WIDTH - 15, 10);
+    (SCREEN_WIDTH - QUIT_BUTTON_WIDTH - HELP_BUTTON_WIDTH - SETTINGS_BUTTON_WIDTH - 15, 10);
 
     dayButton = new Button(TICK_BUTTON);
     dayButton->setPosition(128,272);
