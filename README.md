@@ -21,4 +21,5 @@ Những công việc em đã làm:
   + Thiết kế đồ họa bằng phần mềm GIMP (lấy ý tưởng từ game gốc):
      - Các nhân vật có sprite để chuyển động chân thực hơn
      - Background có 2 layers chuyển động với vận tốc khác nhau tăng tính chân thực cho game
-     - 
+  
+ 
