@@ -16,10 +16,10 @@ Những công việc em đã làm:
         * Music, Text, Timer đều làm những nhiệm vụ tương ứng (Music chứa nhạc, Text load chữ, Timer quản lý thời gian để tăng vận tốc của quái)
         * File highScore.txt để lưu điểm cao
      - Các tính năng: menu, settings (đổi background), quit, help, pause (bằng cách ấn settings hoặc help), replay, high score,...)
-     - Di chuyển của nhân vật chính có quán tính (chạy thêm 1 đoạn dựa vào vận tốc ngay trước đó trước khi chuyển hướng), vận tốc xác định dựa theo độ nghiêng của cầu, thời gian chạy để chân thực hơn, có trạng thái nhấp nháy...
+     - Di chuyển của nhân vật chính có quán tính (chạy thêm 1 đoạn dựa vào vận tốc ngay trước đó trước khi chuyển hướng), vận tốc xác định dựa theo độ nghiêng của cầu, thời gian chạy để chân thực hơn, có trạng thái nhấp nháy (khi chạm enemy lần 1 và trước khi trở về trạng thái bình thường sau lần chạm)...; nhân vật chính cũng được chia làm các state để dễ quản lý
      - 4 loại quái với các cách xử lý khác nhau, cách di chuyển khác nhau
      - Loại tiền thưởng: coin (dùng để tính điểm)
-     - Có level để xác định tốc độ, số lượng các quái
+     - Có level để xác định tốc độ, số lượng các quái (level được tính theo thời gian, mỗi level tầm 5 giây)
   + Thiết kế đồ họa bằng phần mềm GIMP (lấy ý tưởng từ game gốc):
      - Các nhân vật có sprite để chuyển động chân thực hơn
      - Background có 2 layers chuyển động với vận tốc khác nhau tăng tính chân thực cho game
