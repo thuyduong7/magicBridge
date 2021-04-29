@@ -5,14 +5,16 @@ The number of enemies as well as their speed will be increased by each level.
 Link demo: https://youtu.be/VzoHXJDiqLU
 
 Mức điểm em nghĩ em xứng đáng đạt được: 9-10
+
 Những công việc em đã làm:
   + Tự code hoàn chỉnh game:
       - Chia file dựa theo các chức năng của từng file:
         * Core chứa các hàm cơ bản cần có của game (init, load media, handle events, render,...)
         * Game chứa các hàm dùng để init cho mỗi lần chơi, handle events, render theo từng mode cụ thể (start, playing, help, settings, end) 
         * Materials dùng để chứa tất cả các ảnh, sprite cần cho game
-        * Mỗi nhân vật, object có một file riêng để xử lý, các enemies kế thừa struct Enemy chính, coin cũng kế thừa Enemy (để dùng chung các hàm chính, còn đặc tính vẫn là tiền thưởng)
-        * ...
+        * Mỗi nhân vật (Yolk - nhân vật chính, Radish, Spike, Spikeball, Bird), object (Bridge, Button, Background, Coin) có một file riêng để xử lý, các enemies kế thừa struct Enemy chính, coin cũng kế thừa Enemy (để dùng chung các hàm chính, còn đặc tính vẫn là tiền thưởng)
+        * Music, Text, Timer đều làm những nhiệm vụ tương ứng (Music chứa nhạc, Text load chữ, Timer quản lý thời gian để tăng vận tốc của quái)
+        * File highScore.txt để lưu điểm cao
      - Các tính năng: menu, settings (đổi background), quit, help, pause (bằng cách ấn settings hoặc help), replay, high score,...)
      - Di chuyển của nhân vật chính có quán tính (chạy thêm 1 đoạn dựa vào vận tốc ngay trước đó trước khi chuyển hướng), vận tốc xác định dựa theo độ nghiêng của cầu, thời gian chạy để chân thực hơn, có trạng thái nhấp nháy...
      - 4 loại quái với các cách xử lý khác nhau, cách di chuyển khác nhau
