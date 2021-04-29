@@ -2,7 +2,7 @@
 How to Play: Press left and right buttons to tilt the Magic Bridge! Try the best to avoid obstacles and collect coins. 
 The number of enemies as well as their speed will be increased by each level.
 
-Link demo: https://youtu.be/3fUwuMKn4ZU
+Link demo: https://youtu.be/VzoHXJDiqLU
 
 Mức điểm em nghĩ em xứng đáng đạt được: 9-10
 Những công việc em đã làm:
