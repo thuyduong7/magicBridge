@@ -31,7 +31,6 @@ struct SpikeBall : public Enemy
     void setPos();
     void move(const double& mul);
     bool checkCollision(Yolk* yolk);
-    void increaseVelY();
     void render(SDL_Renderer* renderer, STATE state);
     void free();
 
@@ -39,8 +38,7 @@ struct SpikeBall : public Enemy
     int firstEmptyPos, lastEmptyPos;
     bool setCoin;
     Ball **ball;
-    Coin *coin;
-    vector <Coin*> fcoin;
+    vector <Coin*> coin;
     Music _music;
 };
 

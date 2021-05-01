@@ -25,7 +25,6 @@ SpikeBall::SpikeBall():Enemy(SPIKEBALL)
     for (int i = 0; i < MAX_ROWS; i++){
             *(ball+i) = new Ball[NUM_OF_COLS];
     }
-    coin = new Coin[MAX_ROWS];
     setCoin = false;
     _music.loadMusic();
 }
@@ -37,9 +36,9 @@ SpikeBall::~SpikeBall()
         delete ball[i];
     }
     delete []ball;
-    for (int i = 0; i < fcoin.size(); i++){
-        fcoin.erase(fcoin.begin() + i);
-        delete fcoin[i];
+    for (int i = 0; i < coin.size(); i++){
+        coin.erase(coin.begin() + i);
+        delete coin[i];
     }
 }
 
@@ -61,10 +60,9 @@ void SpikeBall::setPos()
     }
     if (setCoin){
         for (int i = 0; i < numOfRows; i++){
-            fcoin.push_back(new Coin);
-            fcoin[i]->posX = firstEmptyPos * SPIKEBALL_WIDTH + (EMPTY_POS_WIDTH - COIN_WIDTH)/2 + MIN_POS_X;
-            //cout << ball[i][0].posY << endl;
-            fcoin[i]->posY = ball[i][0].posY + (SPIKEBALL_HEIGHT - COIN_HEIGHT)/2;
+            coin.push_back(new Coin);
+            coin[i]->posX = firstEmptyPos * SPIKEBALL_WIDTH + (EMPTY_POS_WIDTH - COIN_WIDTH)/2 + MIN_POS_X;
+            coin[i]->posY = ball[i][0].posY + (SPIKEBALL_HEIGHT - COIN_HEIGHT)/2;
         }
     }
     height = numOfRows * SPIKEBALL_HEIGHT;
@@ -79,12 +77,11 @@ void SpikeBall::move(const double& mul)
         }
     }
     if (setCoin){
-        //cout << fcoin.size();
-        for (int i = 0; i < fcoin.size(); i++){
-            fcoin[i]->move(mul);
-            if (fcoin[i]->posY > SCREEN_HEIGHT) {
-                    delete fcoin[i];
-                    fcoin.erase(fcoin.begin() + i);
+        for (int i = 0; i < coin.size(); i++){
+            coin[i]->move(mul);
+            if (coin[i]->posY > SCREEN_HEIGHT) {
+                    delete coin[i];
+                    coin.erase(coin.begin() + i);
             }
         }
     }
@@ -94,11 +91,11 @@ bool SpikeBall::checkCollision(Yolk* yolk)
 {
     // Check if Yolk has eaten coins
     if (setCoin){
-        for (int i = fcoin.size() - 1; i >= 0; i--){
-            if (fcoin[i]->checkCollision(yolk)){
+        for (int i = coin.size() - 1; i >= 0; i--){
+            if (coin[i]->checkCollision(yolk)){
                 Mix_PlayChannel(-1,_music.eatCoin,0);
-                delete fcoin[i];
-                fcoin.erase(fcoin.begin() + i);
+                delete coin[i];
+                coin.erase(coin.begin() + i);
                 yolk->score++;
             }
         }
@@ -151,8 +148,8 @@ void SpikeBall::render(SDL_Renderer* renderer, STATE state)
         }
     }
     if (setCoin){
-        for (int i = 0; i < fcoin.size(); i++){
-            fcoin[i]->render(renderer, state);
+        for (int i = 0; i < coin.size(); i++){
+            coin[i]->render(renderer, state);
         }
     }
 }
