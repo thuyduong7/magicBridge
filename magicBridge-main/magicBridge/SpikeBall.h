@@ -18,7 +18,6 @@ struct Ball : public Enemy
     Ball();
     ~Ball();
     void render(SDL_Renderer* renderer, STATE state);
-    void free();
 
     bool setBall;
 };
@@ -32,7 +31,6 @@ struct SpikeBall : public Enemy
     void move(const double& mul);
     bool checkCollision(Yolk* yolk);
     void render(SDL_Renderer* renderer, STATE state);
-    void free();
 
     int numOfRows;
     int firstEmptyPos, lastEmptyPos;

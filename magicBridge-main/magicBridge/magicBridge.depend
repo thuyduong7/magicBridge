@@ -420,12 +420,12 @@
 1619594927 g:\magicbridge-main\magicbridge-main\magicbridge\background.h
 	"Materials.h"
 
-1619595570 g:\magicbridge-main\magicbridge-main\magicbridge\materials.h
+1619597216 g:\magicbridge-main\magicbridge-main\magicbridge\materials.h
 	<iostream>
 	<SDL.h>
 	<SDL_image.h>
 
-1619592017 g:\magicbridge-main\magicbridge-main\magicbridge\core.h
+1619597026 g:\magicbridge-main\magicbridge-main\magicbridge\core.h
 	<iostream>
 	<SDL.h>
 
@@ -452,27 +452,27 @@
 	"Bridge.h"
 	"Core.h"
 
-1619594318 source:g:\magicbridge-main\magicbridge-main\magicbridge\button.cpp
+1619597216 source:g:\magicbridge-main\magicbridge-main\magicbridge\button.cpp
 	"Button.h"
 
-1619593795 g:\magicbridge-main\magicbridge-main\magicbridge\button.h
+1619890082 g:\magicbridge-main\magicbridge-main\magicbridge\button.h
 	"Materials.h"
 
 1619577523 source:g:\magicbridge-main\magicbridge-main\magicbridge\coin.cpp
 	"Coin.h"
 
-1619577523 g:\magicbridge-main\magicbridge-main\magicbridge\coin.h
+1619890082 g:\magicbridge-main\magicbridge-main\magicbridge\coin.h
 	"Core.h"
 	"Enemy.h"
 	<vector>
 
-1619592017 source:g:\magicbridge-main\magicbridge-main\magicbridge\core.cpp
+1619597026 source:g:\magicbridge-main\magicbridge-main\magicbridge\core.cpp
 	"Core.h"
 	"Game.h"
 	"Materials.h"
 	"Music.h"
 
-1619592037 g:\magicbridge-main\magicbridge-main\magicbridge\game.h
+1619597026 g:\magicbridge-main\magicbridge-main\magicbridge\game.h
 	"Materials.h"
 	"Music.h"
 	"Background.h"
@@ -500,7 +500,7 @@
 	"Enemy.h"
 	"Core.h"
 
-1619577348 g:\magicbridge-main\magicbridge-main\magicbridge\spikeball.h
+1619890082 g:\magicbridge-main\magicbridge-main\magicbridge\spikeball.h
 	"Enemy.h"
 	"Core.h"
 	"Coin.h"
@@ -517,7 +517,7 @@
 1619577523 source:g:\magicbridge-main\magicbridge-main\magicbridge\enemy.cpp
 	"Enemy.h"
 
-1619595754 source:g:\magicbridge-main\magicbridge-main\magicbridge\game.cpp
+1619698520 source:g:\magicbridge-main\magicbridge-main\magicbridge\game.cpp
 	"Game.h"
 	<iostream>
 	<fstream>
@@ -527,7 +527,7 @@
 	<ctime>
 	"Core.h"
 
-1619595570 source:g:\magicbridge-main\magicbridge-main\magicbridge\materials.cpp
+1619597216 source:g:\magicbridge-main\magicbridge-main\magicbridge\materials.cpp
 	"Materials.h"
 	"Yolk.h"
 	"Enemy.h"
@@ -544,7 +544,7 @@
 1619577523 source:g:\magicbridge-main\magicbridge-main\magicbridge\spike.cpp
 	"Spike.h"
 
-1619577348 source:g:\magicbridge-main\magicbridge-main\magicbridge\spikeball.cpp
+1619889639 source:g:\magicbridge-main\magicbridge-main\magicbridge\spikeball.cpp
 	"SpikeBall.h"
 
 1619573282 source:g:\magicbridge-main\magicbridge-main\magicbridge\text.cpp

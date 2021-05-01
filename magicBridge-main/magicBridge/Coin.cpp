@@ -3,7 +3,6 @@
 Coin::Coin() : Enemy(COIN)
 {
     posY = -COIN_HEIGHT;
-    sumOFCoins = 0;
 }
 
 Coin::~Coin()

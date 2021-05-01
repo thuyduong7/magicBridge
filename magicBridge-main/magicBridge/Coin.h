@@ -14,11 +14,7 @@ struct Coin : public Enemy
     void move(const double& mul);
     bool checkCollision(Yolk* yolk);
     bool checkCollisionEnemy(Enemy* enemy);
-    //void increaseVelY();
     void render(SDL_Renderer* renderer, STATE state);
-    void free();
-
-    int sumOFCoins;
 };
 
 

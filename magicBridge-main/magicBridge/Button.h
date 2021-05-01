@@ -30,22 +30,12 @@ enum BUTTONSPRITE
 
 struct Button
 {
-    //Initializes internal variables
     Button(MAT_TYPE _type);
-
-    //Sets top left position
     void setPosition(const int& x, const int& y);
-
-    //Handles mouse event
     void handleEvent(const SDL_Event& e);
-
-    //Shows button sprite
     void render(SDL_Renderer* renderer);
 
-    //Top left position
     SDL_Rect position;
-
-    //Currently used global sprite
     BUTTONSPRITE currentSprite;
     MAT_TYPE type;
     Materials buttonMat;
